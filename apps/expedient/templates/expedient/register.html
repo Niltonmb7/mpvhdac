@@ -1,0 +1,463 @@
+{% extends "mpv/base.html" %} 
+{% load static %} 
+
+{% block content %}
+<section class="content">
+    <div id="registerExpedient">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Expediente
+                    <small class="text-muted">REGISTRO EN MESA DE PARTES VIRTUAL</small>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <form @submit.prevent="saveExpedient" class="form-horizontal" method="post">
+                {% csrf_token %}
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Datos</strong> del Solicitante</h2>
+                            </div>
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class='row clearfix'>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="type_person" class="my_label" style="margin-top: 10px;">Tipo de Persona</label>
+                                            <div class="">
+                                                {{ form.type_person }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1" v-if='form.type_person == "J"'>
+                                            <label for="j_ruc" class="my_label" style="margin-top: 10px;">RUC</label>
+                                            <div class="form-group">
+                                                {{ form.j_ruc }}
+                                            </div>
+                                            <label for="j_business_name" class="my_label" style="margin-top: 10px;">Razón Social</label>
+                                            <div class="form-group">
+                                                {{ form.j_business_name }}
+                                            </div>
+                                            <label for="j_address" class="my_label" style="margin-top: 10px;">Dirección</label>
+                                            <div class="form-group">
+                                                {{ form.j_address }}
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="n_dni" class="my_label" style="margin-top: 10px;">DNI (Representante legal)</label>
+                                            <div class="form-group">
+                                                {{ form.n_dni }}
+                                            </div>
+                                            <label for="n_last_name0" class="my_label" style="margin-top: 10px;">Apellido Paterno</label>
+                                            <div class="form-group">
+                                                {{ form.n_last_name0 }}
+                                            </div>
+                                            <label for="n_last_name1" class="my_label" style="margin-top: 10px;">Apellido Materno</label>
+                                            <div class="form-group">
+                                                {{ form.n_last_name1 }}
+                                            </div>
+                                            <label for="n_first_name" class="my_label" style="margin-top: 10px;">Nombres</label>
+                                            <div class="form-group">
+                                                {{ form.n_first_name }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1" v-if='form.type_person == "J"'>
+                                        </div>
+                                        
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="n_cellphone" class="my_label" style="margin-top: 10px;">Celular</label>
+                                            <div class="form-group">
+                                                {{ form.n_cellphone }}
+                                            </div>
+                                            <label for="n_email" class="my_label" style="margin-top: 10px;">Correo Electrónico</label>
+                                            <div class="form-group">
+                                                {{ form.n_email }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Datos</strong> del Documento</h2>
+                            </div>
+                            <div class="body">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="row clearfix">
+
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="type_document" class="my_label" style="margin-top: 10px;">Tipo de Documento:</label>
+                                            <div class="">
+                                                {{ form_document.type_document }}
+                                            </div>
+
+                                            <label for="number" class="my_label" style="margin-top: 10px;">Número</label>
+                                            <div class="form-group">
+                                                {{ form_document.number }}
+                                            </div>
+
+                                            <label for="folio" class="my_label" style="margin-top: 10px;">Folio</label>
+                                            <div class="form-group">
+                                                {{ form_document.folio }}
+                                            </div>
+
+                                            {% comment %} <div class="row clearfix">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <label for="number" class="my_label" style="margin-top: 10px;">Número</label>
+                                                    <div class="form-group">
+                                                        {{ form_document.number }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <label for="folio" class="my_label" style="margin-top: 10px;">Folio</label>
+                                                    <div class="form-group">
+                                                        {{ form_document.folio }}
+                                                    </div>
+                                                </div>
+                                            </div> {% endcomment %}
+                                        </div>
+                                        
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="subject" class="my_label" style="margin-top: 10px;">Asunto</label>
+                                            <div class="form-group">
+                                                {{ form_document.subject }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="file_principal" class="my_label" style="margin-top: 10px;">Documento Principal</label>
+                                            <div class="form-group">
+                                                <input type='file' id='file_principal' accept="application/pdf" class='form-control' style="max-width: 100%" v-on:change='changeFilePrincipal'>
+                                            </div>
+                                        </div>
+
+                                        {{ form_document.attached_name }}
+                                        {{ form_document.attached_route }}
+                                    </div>
+                                    
+                                    <div class="row clearfix" style='margin-top: 20px; margin-bottom: 25px;'>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 offset-md-1">
+                                            <div class='table-responsive table-sm'>
+                                                <table class="table table-hover m-b-0 c_list footable footable-1 footable-paging footable-paging-center breakpoint-lg">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Documento Principal</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(attached, index) in list_attached">
+                                                            <th scope="row">[[ index + 1 ]]</th>
+                                                            <td>[[ attached.filename ]]</td>
+                                                            <td>
+                                                                <i class="material-icons">trash</i>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row clearfix">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 offset-md-1">
+                                            <label for="file_anexo" class="my_label" style="margin-top: 10px;">Documentos Anexos</label>
+                                            <div class="form-group">
+                                                <input type='file' id='file_anexo' accept="application/pdf" class='form-control' style="max-width: 100%" v-on:change='changeFileAnexo'>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix" style='margin-top: 20px; margin-bottom: 25px;'>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 offset-md-1">
+                                            <div class='table-responsive table-sm'>
+                                                <table class="table table-hover m-b-0 c_list footable footable-1 footable-paging footable-paging-center breakpoint-lg">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Documento Anexo</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(attached, index) in list_attached_anexo">
+                                                            <th scope="row">[[ index + 1 ]]</th>
+                                                            <td>[[ attached.filename ]]</td>
+                                                            <td>
+                                                                <i class="material-icons">trash</i>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-raised btn-success btn-round waves-effect float-md-right" style='margin-bottom: 50px' type="submit">REGISTRAR DOCUMENTO</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+    const reg = new Vue({
+        delimiters: ['[[',']]'],
+        el: '#registerExpedient',
+        data: {
+            quantity_adjunt: 0,
+            form: {
+                    type_person: 'N',
+                    n_last_name0: '',
+                    n_last_name1: '',
+                    n_first_name: '',
+                    n_cellphone: '',
+                    n_email: ''
+                },
+            form_document: {
+                    attached_name: '',
+                    attached_route: '',
+                },
+            list_attached: [],
+            list_attached_anexo: [],
+        },
+
+        mounted: function () {
+            this.changeTypePerson();
+        },
+
+        methods: {
+            isNumber: function(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if ((charCode > 31 && (charCode < 48 || charCode > 57)) ) {
+                    evt.preventDefault();;
+                } else {
+                    return true;
+                }
+            },
+
+            isMayus(e) {
+                var dat = this.form_document.number;
+                this.form_document.number = dat.toUpperCase();
+            },
+
+            loaded() {
+                setTimeout(() => $('.show-tick').selectpicker('refresh'));
+            },
+
+            changeTypePerson() {
+                this.loaded();
+                var t_person = this.form.type_person;
+
+                if (t_person == 'N') {
+                    var csrf = $("[name=csrfmiddlewaretoken]").val();
+
+                    axios({ 
+                        headers: { 'X-CSRFToken': csrf, 'Content-Type': 'application/json' },
+                        method: 'POST',
+                        url: 'reniec/',
+                        data: { 'dni': '', 'type': 'user' }
+                    }).then((response) => {
+                        if (response.status == 200) {
+                            if ('dni' in response.data) {
+                                this.form.n_dni = response.data['dni'];
+                                this.form.n_last_name0 = response.data['first_name'];
+                                this.form.n_last_name1 = response.data['last_name'];
+                                this.form.n_first_name = response.data['name'];
+                                this.form.n_cellphone = response.data['cellphone'];
+                                this.form.n_email = response.data['mail'];
+                            }
+                        }
+                    }).catch(er => {
+                        console.log(er)
+                        swal("Información!", er);
+                    });
+                }
+            },
+
+            changeDni() {
+                this.form.n_last_name0 = '';
+                this.form.n_last_name1 = '';
+                this.form.n_first_name = '';
+                this.form.n_cellphone = '';
+                this.form.n_email = '';
+
+                if((this.form.n_dni).length == 8){
+                    var csrf = $("[name=csrfmiddlewaretoken]").val();
+                    var dni = this.form.n_dni;
+
+                    axios({ 
+                        headers: { 'X-CSRFToken': csrf, 'Content-Type': 'application/json' },
+                        method: 'POST',
+                        url: 'reniec/',
+                        data: { 'dni': dni, 'type': 'search' }
+                    }).then((response) => {
+                        if (response.status == 200) {
+                            if ('dni' in response.data) {
+                                this.form.n_last_name0 = response.data['first_name'];
+                                this.form.n_last_name1 = response.data['last_name'];
+                                this.form.n_first_name = response.data['name'];
+                            }else{
+                                swal("Información!", 'El número de DNI ingresado es incorrecto.');
+                            }
+                        }
+                    }).catch(er => {
+                        console.log(er)
+                        swal("Información!", er);
+                    });
+                }
+            },
+
+            changeFilePrincipal(event) {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var ext = $('#file_principal').val().split('.').pop();
+
+                if (ext == "pdf") {
+                    var files = event.target.files
+                    
+                    if (files.length > 0) {
+                        if (files[0].size > 10000000) {
+                            $("#file_principal").val('');
+                            swal("Información!", 'El archivo PDF no debe superar los 10mb.');
+                        }else{
+                            var formData = new FormData();
+                            formData.append('file_', files[0]);
+
+                            axios({
+                                headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                                method: 'POST',
+                                url: 'api/',
+                                data: formData
+                            }).then(response => {
+                                if(response.status == 200){
+                                    console.log(response)
+                                    $("#file_principal").val('');
+                                    $("#file_principal").attr('disabled', true);
+                                    this.list_attached.push(response.data);
+                                    this.form_document.attached_name = response.data['filename'];
+                                    this.form_document.attached_route = response.data['file_url'];
+                                }
+                            }).catch(er => {
+                                console.log(er)
+                                swal("Información!", er);
+                            })
+                        }
+                    }
+                }
+            },
+
+            changeFileAnexo(event) {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var ext = $('#file_anexo').val().split('.').pop();
+
+                if (ext == "pdf") {
+                    var files = event.target.files
+                    
+                    if (files.length > 0) {
+                        if (files[0].size > 10000000) {
+                            $("#file_anexo").val('');
+                            swal("Información!", 'El archivo PDF no debe superar los 10mb.');
+                        }else{
+                            if (this.list_attached_anexo.length == this.quantity_adjunt) {
+                                $("#file_anexo").val('');
+                                $("#file_anexo").attr('disabled', true);
+                                swal("Información!", 'Solo se pueden cargar hasta ' + this.quantity_adjunt + ' anexos.');
+                            }else{
+                                var formData = new FormData();
+                                formData.append('file_', files[0]);
+
+                                axios({
+                                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                                    method: 'POST',
+                                    url: 'api/',
+                                    data: formData
+                                }).then(response => {
+                                    if(response.status == 200){
+                                        console.log(response)
+                                        $("#file_anexo").val('');
+                                        this.list_attached_anexo.push(response.data);
+                                    }
+                                }).catch(er => {
+                                    console.log(er)
+                                    swal("Información!", er);
+                                })
+                            }
+                        }
+                    }
+                }
+            },
+
+            saveExpedient(event) {
+                $(".page-loader-wrapper").css({"display": "block", "background": "#acadce40"});
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var frmData = new FormData(event.target);
+                frmData.append('file_anexo', JSON.stringify(this.list_attached_anexo));
+
+                axios({
+                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                    method: 'POST',
+                    url: 'api/',
+                    data: frmData
+                }).then(response => {
+                    if(response.status == 200){
+                        console.log(response)
+                        var URLactual = location.href;
+                        var URLlist = URLactual.replace("register", "list");
+                        $(".page-loader-wrapper").css("display", "none");
+                        $(".page-loader-wrapper").stop();
+                        
+                        swal({
+                            title: "Información!",
+                            text: "Se registró correctamente! Se envió un mensaje de cofirmación de registro.",
+                            type: "success",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+
+                        setTimeout(function () {
+                            location.href = URLlist;
+                        }, 2000);
+                    }
+                }).catch(er => {
+                    console.log(er)
+                    swal("Información!", er);
+                })
+            }
+        } 
+    });
+    </script>
+
+    <script>
+    $(document).ready(function(){
+        var quan_adjunt = '{{ quantity_adjunt }}';
+        if (quan_adjunt) {
+            reg.quantity_adjunt = quan_adjunt;
+        }else {
+            reg.quantity_adjunt = 0;
+        }
+    });
+    </script>
+{% endblock scripts %}

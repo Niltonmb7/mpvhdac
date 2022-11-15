@@ -1,0 +1,690 @@
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{% block title %}MESA DE PARTES VIRTUAL - HRDAC{% endblock title %}</title>
+<link rel="icon" href='/static/img/favicon.png' type="image/x-icon">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-material-datetimepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-jvectormap-2.0.3.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/morris.css' %}">
+<link rel="stylesheet" href="{% static 'css/morris.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/inbox.css' %}">
+<link rel="stylesheet" href="{% static 'plugin/footable/css/footable.core.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/color_skins.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/toastr.css' %}">
+<link rel="stylesheet" href="{% static 'css/sweetalert.css' %}">
+<link rel="stylesheet" href="{% static 'css/switch-colors.css' %}">
+
+
+</head>
+<style>
+    .pointer{
+        cursor: pointer;
+    }
+    .hover_role:hover { background: #c9d2da !important; }
+    .hover_role_exit:hover {
+        border-radius: 10px;
+                border: 1px solid #07ffe800 !important;
+                background-color: #b45050e6 !important;
+                /* color: ivory; */
+                color: #e7e1e1!important;
+    }
+</style>
+<body class="theme-blue index2">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{% static 'img/logo.svg' %}" width="48" height="48" alt="Compass"></div>
+        <p>Cargando...</p>
+    </div>
+</div>
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="col-12">        
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="barss"></a>
+            {% if request.session.menu.0.permisos %}
+                {% for per in request.session.menu.0.permisos%}
+                    {% if per.name == request.session.current %}
+                        <a class="navbar-brand" href="{% url per.link %}"><img src="/static/img/logo_mpv.png" width="100" alt="Compass"><span class="m-l-10">MPV - HDAC</span></a>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <a class="navbar-brand" href="#"><img src="/static/img/logo_mpv.png" width="100" alt="Compass"><span class="m-l-10">MPV - HDAC</span></a>
+            {% endif %}
+        </div>
+        <!-- <ul class="nav navbar-nav navbar-left">            
+            <li class="hidden-sm-down">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-addon">
+                        <i class="zmdi zmdi-search"></i>
+                    </span>
+                </div>
+            </li>
+        </ul> -->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-help"></i>
+                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right slideDown">
+                    <li class="header">Ayuda</li>
+                    <li class="body">
+                        <ul class="menu list-unstyled">
+                            {% if request.session.rol_active.pk == 8 %}
+                                <li> <a href="https://drive.google.com/file/d/1AVurh48OH1K9uGk04FUTGV0jI9Fn67SI/view?usp=sharing" target="_blank">
+                                    <div class="icon-circle bg-blue"><i class="zmdi zmdi-book"></i></div>
+                                    <div class="menu-info">
+                                        <h4>Manual de Usuario</h4>
+                                        <p><i class="zmdi zmdi-time"></i> Administrado </p>
+                                    </div>
+                                    </a> </li>
+                                <li> <a href="https://youtu.be/9wJuuZrRKeI" target="_blank">
+                                    <div class="icon-circle bg-red"><i class="zmdi zmdi-youtube"></i></div>
+                                    <div class="menu-info">
+                                        <h4>Videotutorial</h4>
+                                        <p> <i class="zmdi zmdi-time"></i> Youtube </p>
+                                    </div>
+                                    </a> </li>
+                            {% elif request.session.rol_active.pk == 3 %}
+                                <li> <a href="https://drive.google.com/file/d/15_MQYmw6IyNJggIzBvly4BeLiR37r1o-/view?usp=sharing" target="_blank">
+                                    <div class="icon-circle bg-blue"><i class="zmdi zmdi-book"></i></div>
+                                    <div class="menu-info">
+                                        <h4>Manual de Usuario</h4>
+                                        <p><i class="zmdi zmdi-time"></i> Mesa de Partes </p>
+                                    </div>
+                                    </a> </li>
+                                <li> <a href="https://youtu.be/Qljzx_9Z8y4" target="_blank">
+                                    <div class="icon-circle bg-red"><i class="zmdi zmdi-youtube"></i></div>
+                                    <div class="menu-info">
+                                        <h4>Videotutorial</h4>
+                                        <p> <i class="zmdi zmdi-time"></i> Youtube </p>
+                                    </div>
+                                    </a> </li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="fullscreen hidden-sm-down" data-provide="fullscreen" data-close="true"><i class="zmdi zmdi-fullscreen"></i></a>
+            </li>
+            <li class="">
+                <img  href="javascript:void(0);" src="/static/img/profile_av.jpg" class="rounded-circle avatar pointer js-right-sidebar m-r-10 "  data-close="true" alt="foto_profile" width="45">
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="menu-container">
+    <div class="menu">
+        <ul>
+            {% for key,menu in request.session.menu.items %}
+                {% if menu.menu == request.session.current %}
+            <!-- <li>
+                <a href="javascript:void(0)"> <i class="{{menu.icon}}"></i> {{menu.menu}}</a>
+                <ul> -->
+                    {% for subm in menu.submenus %}
+                        {% url subm.fields.link as the_url %}
+                        {% if the_url %}
+                            <li><a href="{% url subm.fields.link %}">  {{ subm.fields.name }} </a> </li>
+                        {% else %}
+                            <li><a href="#"> {{ subm.fields.name }} </a> </li>
+                        {% endif %}
+                    {% endfor %} 
+          
+                <!-- </ul>
+            </li> -->
+                {% endif %}
+            {% endfor %} 
+        </ul>
+    </div>
+</div>
+
+<!-- Right Sidebar -->
+<aside id="rightsidebar" class="right-sidebar" style='border-left: 3px solid #0361c5 !important; background: #dbe2e8;'>
+    <div class=" member-card m-t-90">
+        <div class="member-img">
+            <a href="profile.html" class="">
+                <img src="/static/img/profile_av.jpg" class="rounded-circle" style="width: 80px" alt="profile-image">
+            </a>
+        </div>
+        <div class="body">
+            <div class="col-12">
+                <h5  class="m-t-20" style='color:#0767ab; font-size: 1.17em; margin-bottom: 15px;'>{{ request.user.docid }}</h5>
+                    {{ request.user.docid.mail }}   
+            </div>
+            <div class="p-0 m-t-10 inbox" style="border-top: 1px solid #007bff !important;">
+                <ul class="mail_list list-group">
+                    <li class="list-group-item  p-2" style="background-color: #1a4669; border-bottom: 2px solid #0361c5; ">
+                        <div class="text-center">
+                            <div class='col-12'>   
+                                {% comment %} <img src="/static/img/{{ request.session.rol_active.name }}.png" class="rounded-circle" width="40" alt="">  {% endcomment %}
+                                <span class="text-white" >{{ request.session.rol_active.name.title }}</span>
+                                <div class="notify" style="top: 20%;">
+                                    <span class="heartbit" style="border-color: #539b44;"></span>
+                                    <span class="point" style="background-color: #81db6f;"></span>                    
+                                </div> 
+                            </div>            
+                        </div>
+                    </li>
+                    {% if request.session.roles %}
+                        {% for key,rol in request.session.roles.items %}
+                            {% if request.session.rol_active.pk != rol.pk %}
+                                <li class="list-group-item hover_role pointer p-1" style="background-color: #cddeef;">
+                                    <div class="text-center">
+                                        <form id="formchangerole_{{key}}" name="changerole" action="{% url 'dashboard:home' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="text"  name="rol_id" value="{{ rol.pk }}" hidden>
+                                                <a  href="javascript:;" onclick="this.parentNode.submit();return false;">
+                                                    <div class='col-12'>   
+                                                        <img src="/static/img/{{ rol.name }}.png" class="rounded-circle" width="40" alt=""> 
+                                                        <span class="text-muted" >{{ rol.name.title }}</span>
+                                                    </div> 
+                                                </a>
+                                        </form>            
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <a class="text-center text-muted hover_role_exit p-2"  style="background-color: #e6d4d4e6;"  href="{% url 'dashboard:logout' %}">
+                        <i class='zmdi zmdi-power'></i> <span >Salir</span>  
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
+{% block content %}
+{% if request.session.rol_active.pk == 3 %}
+    <div id='reportExpedient'>
+        <section class='content'>
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-12">
+                        <h2>Dashboard de Expedientes
+                        <small class="text-muted">MESA DE PARTES VIRTUAL</small>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="card action_bar">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <form method="post">{% csrf_token %}</form>  
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <label for="date_begin">Desde</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="zmdi zmdi-calendar"></i>
+                                    </span>
+                                    <input type="text" id="date_begin" class="form-control dataspicker">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <label for="date_end">Hasta</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="zmdi zmdi-calendar"></i>
+                                    </span>
+                                    <input type="text" id="date_end" class="form-control dataspicker">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2" style='padding-top: 24px;'>
+                                {% comment %} <button type="button" class="btn btn-default btn-icon btn-simple btn-icon-mini btn-round hidden-sm-down">
+                                    <i class="zmdi zmdi-archive"></i>
+                                </button> {% endcomment %}
+                            </div>                         
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card widget_2">
+                    <ul class="row clearfix list-unstyled m-b-0">
+                        <li class="col-lg-4 col-md-8 col-sm-12">
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h5 class="m-t-0">Enviado a Mesa de Partes</h5>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                        <h2 class="">[[ data_state_emp.cant ]]</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress m-t-20">
+                                        <div class="progress-bar l-amber" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-lg-4 col-md-8 col-sm-12">
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h5 class="m-t-0">Observados</h5>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                        <h2 class="">[[ data_state_obs.cant ]]</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress m-t-20">
+                                        <div class="progress-bar l-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-lg-4 col-md-8 col-sm-12">
+                            <div class="body">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h5 class="m-t-0">Registrados en SGD</h5>
+                                    </div>
+                                    <div class="col-5 text-right">
+                                        <h2 class="">[[ data_state_sgd.cant ]]</h2>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="progress m-t-20">
+                                        <div class="progress-bar l-parpl" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Tipo Documento</strong> (Registrados en SGD)</h2>
+                            </div>
+                            <div class="body">
+                                <div id="donut_chart" class="dashboard-donut-chart text-center"></div>
+                                <table class="table m-t-15 m-b-0">
+                                    <tbody>
+                                        <tr v-for='(typ, index) in data_type_document'>                      
+                                            <td>[[ typ.type_document ]]</td>
+                                            <td>[[ typ.cant ]]</td>
+                                            <td>
+                                                <i class="material-icons" :style='{ color: colors[index] }'>check_circle</i>
+                                            </td>
+                                        </tr>                             
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Tipo Persona</strong> (Registrados en SGD)</h2>
+                            </div>
+                            <div class="body">
+                                <div id="donut_chart_person" class="dashboard-donut-chart text-center"></div>
+                                <table class="table m-t-15 m-b-0">
+                                    <tbody>
+                                        <tr v-for='(typ, index) in data_type_person'>                      
+                                            <td>[[ typ.type_person ]]</td>
+                                            <td>[[ typ.cant ]]</td>
+                                            <td>
+                                                <i class="material-icons" :style='{ color: colors[index] }'>check_circle</i>
+                                            </td>
+                                        </tr>                             
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-8">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Cantidad</strong> Mensual</h2>
+                            </div>
+                            <div class="body">
+                                <canvas id="line_chart" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </section>
+    </div>
+{% endif %}
+{% endblock content %}
+<!-- Jquery Core Js --> 
+<script src="{% static 'plugin/libscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/vendorscripts.bundle.js' %}"></script>
+
+<script src="{% static 'plugin/moment.js' %}"></script>
+<script src="{% static 'plugin/bootstrap-colorpicker.js' %}"></script>
+<script src="{% static 'plugin/jquery.inputmask.bundle.js' %}"></script>
+<script src="{% static 'plugin/jquery.multi-select.js' %}"></script>
+<script src="{% static 'plugin/bootstrap-material-datetimepicker.js' %}"></script>
+<script src="{% static 'plugin/jquery.steps.js' %}"></script>
+
+<script src="{% static 'plugin/countTo.bundle.js' %}"></script>
+<script src="{% static 'plugin/morrisscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/jvectormap.bundle.js' %}"></script>
+<script src="{% static 'plugin/knob.bundle.js' %}"></script>
+<script src="{% static 'plugin/sparkline.bundle.js' %}"></script>
+
+<script src="{% static 'plugin/charts/Chart.bundle.js' %}"></script>
+<script src="{% static 'plugin/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/charts/jquery-knob.js' %}"></script>
+
+<script src="{% static 'plugin/footable/js/footable.all.min.js' %}"></script>
+<script src="{% static 'plugin/footable/js/footable-init.js' %}"></script>
+
+<script src="{% static 'plugin/bootstrap-notify.js' %}"></script>
+<script src="{% static 'plugin/notifications.js' %}"></script>
+
+<script src="{% static 'plugin/toastr.js' %}"></script>
+<script src="{% static 'plugin/sweetalert.min.js' %}" ></script>
+
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/axios.min.js' %}"></script>
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+    
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+    
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+    
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+
+      $('.datapicker').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+      });
+
+      $('.date').inputmask('yyyy-mm-dd', { placeholder: '____-__-__' });
+      
+      $('.onlynumber').keyup(function (){
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+      });
+
+      $('.datetimepicker').bootstrapMaterialDatePicker({
+        format: 'dddd DD MMMM YYYY - HH:mm',
+        clearButton: true,
+        weekStart: 1
+      });
+
+      $('.datapicker').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+      });
+
+      $('.timepicker').bootstrapMaterialDatePicker({
+        format: 'HH:mm',
+        clearButton: true,
+        date: false
+      });
+
+      $('.date').inputmask('yyyy-mm-dd', { placeholder: '____-__-__' });
+    
+    });    
+    </script>    
+
+{% block scripts %}
+{% if request.session.rol_active.pk == 3 %}
+<script>
+    const rep = new Vue({
+        delimiters: ['[[',']]'],
+        el: '#reportExpedient',
+        data: {
+            date_begin: moment().startOf('month').format('YYYY-MM-DD'),
+            date_end: moment().endOf('month').format('YYYY-MM-DD'),
+            colors: ['#93e3ff', '#b0dd91', '#ffe699', '#f8cbad', '#a4a4a4', '#F4FAFB', '#D6F7F0', '#F9F1D6'],
+            data_state_emp: [],
+            data_state_obs: [],
+            data_state_sgd: [],
+            data_type_document: [],
+            data_type_document_graph: [],
+            data_type_person: [],
+            data_type_person_graph: [],
+            long_emp: [],
+            long_obs: [],
+            long_sgd: [],
+        },
+
+        mounted: function () {
+            this.getDatos();
+        },
+
+        methods: {
+            callMorris() {
+                $('#donut_chart').html('');
+                $('#donut_chart_person').html('');
+                Morris.Donut({
+                    element: 'donut_chart',
+                    data: this.data_type_document_graph,
+                    colors: this.colors,
+                    formatter: function(y) {
+                        return y + '%'
+                    }
+                });
+
+                Morris.Donut({
+                    element: 'donut_chart_person',
+                    data: this.data_type_person_graph,
+                    colors: this.colors,
+                    formatter: function(y) {
+                        return y + '%'
+                    }
+                });
+            },
+
+            callChart() {
+                new Chart(document.getElementById("line_chart").getContext("2d"), this.getConfigChartJs());
+            },
+
+            getConfigChartJs() {
+                var config = null;
+
+                config = {
+                    type: 'line',
+                    data: {
+                        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
+                        datasets: [{
+                            label: "Enviados a Mesa de Partes",
+                            data: this.long_emp,
+                            borderColor: 'rgba(247, 207, 104, 0.2)',
+                            backgroundColor: 'rgba(247, 207, 104, 0.2)',
+                            pointBorderColor: 'rgba(247, 207, 104, 0.5)',
+                            pointBackgroundColor: 'rgba(247, 207, 104, 0.2)',
+                            pointBorderWidth: 1
+                        }, {
+                            label: "Observados",
+                            data: this.long_obs,
+                            borderColor: 'rgba(134, 240, 255, 0.2)',
+                            backgroundColor: 'rgba(134, 240, 255, 0.4)',
+                            pointBorderColor: 'rgba(134, 240, 255, 0)',
+                            pointBackgroundColor: 'rgba(134, 240, 255, 0.9)',
+                            pointBorderWidth: 1
+                        }, {
+                            label: "Registrado en SGD",
+                            data: this.long_sgd,
+                            borderColor: 'rgba(168, 144, 211, 0.2)',
+                            backgroundColor: 'rgba(168, 144, 211, 0.4)',
+                            pointBorderColor: 'rgba(168, 144, 211, 0)',
+                            pointBackgroundColor: 'rgba(168, 144, 211, 0.9)',
+                            pointBorderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: false,
+                        
+                    }
+                }
+                
+                return config;
+            },
+
+            getDatos() {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                $(".page-loader-wrapper").css({"display": "block", "background": "#acadce40"});
+                var frmData = new FormData();
+                frmData.append('date_begin', this.date_begin);
+                frmData.append('date_end', this.date_end);
+                
+                axios({ 
+                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                    method: 'POST',
+                    url: 'datos/',
+                    data: frmData
+                }).then((response) => {
+                    if (response.status == 200) {
+                        if (response.data){ 
+                            this.data_state_emp= [];
+                            this.data_state_obs= [];
+                            this.data_state_sgd= [];
+
+                            for (i=0; i < response.data.data_state.length; i ++){
+                                if (response.data.data_state[i]['state'] == 'EMP') {
+                                    this.data_state_emp = response.data.data_state[i];
+                                }else{
+                                    if (response.data.data_state[i]['state'] == 'OBS') {
+                                        this.data_state_obs = response.data.data_state[i];
+                                    }else{
+                                        if (response.data.data_state[i]['state'] == 'SGD') {
+                                            this.data_state_sgd = response.data.data_state[i];
+                                        }
+                                    }
+                                }
+                            }
+
+                            this.data_type_document = response.data.data_type_document;
+                            this.data_type_document_graph = [];
+                            var graph_tmp = [];
+                            for (i=0; i < response.data.data_type_document.length; i ++){
+                                var tmp_ = { label: response.data.data_type_document[i]['type_document'], value: response.data.data_type_document[i]['percent'] }
+                                graph_tmp.push(tmp_);
+                            }
+                            this.data_type_document_graph = graph_tmp;
+
+                            this.data_type_person = response.data.data_type_person;
+                            this.data_type_person_graph = [];
+                            var graph_per_tmp = [];
+                            for (i=0; i < response.data.data_type_person.length; i ++){
+                                var tmp_ = { label: response.data.data_type_person[i]['type_person'], value: response.data.data_type_person[i]['percent'] }
+                                graph_per_tmp.push(tmp_);
+                            }
+                            this.data_type_person_graph = graph_per_tmp;
+                            this.callMorris();
+
+                            var tmp_emp = [];
+                            for (i=0; i < response.data.data_long_emp.length; i ++){
+                                tmp_emp.push(response.data.data_long_emp[i]['total']);
+                            }
+                            this.long_emp = tmp_emp;
+
+                            var tmp_obs = [];
+                            for (i=0; i < response.data.data_long_obs.length; i ++){
+                                tmp_obs.push(response.data.data_long_obs[i]['total']);
+                            }
+                            this.long_obs = tmp_obs;
+
+                            var tmp_sgd = [];
+                            for (i=0; i < response.data.data_long_sgd.length; i ++){
+                                tmp_sgd.push(response.data.data_long_sgd[i]['total']);
+                            }
+                            this.long_sgd = tmp_sgd;
+
+                            this.callChart();
+                        }
+                    }
+                    $(".page-loader-wrapper").css("display", "none");
+                    $(".page-loader-wrapper").stop();
+                }).catch(er => {
+                    console.log(er)
+                    swal("Información!", er);
+                });
+            },
+        }
+    });
+
+</script>
+
+<script>
+    $(window).on('scroll',function() {
+        $('.card').each(function() {
+            var imagePos = $(this).offset().top;
+
+            var topOfWindow = $(window).scrollTop();
+            if (imagePos < topOfWindow + 400) {
+                $(this).addClass("pullUp");
+            }
+        });
+    });
+
+    $(document).ready(function(){
+        const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+        const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
+        $('#date_begin').val(startOfMonth);
+        $('#date_end').val(endOfMonth);
+
+        $('.dataspicker').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD',
+            clearButton: true,
+            weekStart: 1,
+            time: false,
+            clearText: 'Limpiar',
+            cancelText: 'Cancelar'
+        });
+
+        $('#date_begin, #date_end').change(function() {
+            rep.date_begin = $('#date_begin').val();
+            rep.date_end = $('#date_end').val();
+            rep.getDatos();
+        })
+    });
+</script>
+{% endif %}
+{% endblock scripts %}
+</body>
+</html>

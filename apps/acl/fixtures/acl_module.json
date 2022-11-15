@@ -1,0 +1,13 @@
+[
+    {
+        "pk": 1, 
+        "model": "acl.modules", 
+        "fields": {
+            "name": "SEGURIDAD",
+            "app_name":"acl",
+            "route":"index_security",
+            "order":1,
+            "state":1
+        }
+    }
+]

@@ -1,0 +1,281 @@
+{% extends "security/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .z-index-5{
+        z-index: 55555;
+    }
+    #demo-input-search2 {
+        border: 0;
+        float: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-radius: 0;
+        margin-left: 10px;
+        color: #67757c;
+    }
+ 
+.footable .pagination li a {
+    position: relative;
+    display: block;
+    padding: .3rem .4rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #0275d8;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    font-size: 13px;
+}
+
+.footable .pagination li.active a {
+    z-index: 2;
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8
+}
+
+.footable .pagination li.disabled a {
+    color: #636c72;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #ffffff;
+    border-color: #ddd
+}
+
+.footable .pagination li:first-child a {
+    margin-left: 0;
+    border-bottom-left-radius: .25rem;
+    border-top-left-radius: .25rem
+}
+
+.footable-odd {
+    background: #f2f4f8
+}
+td{ color: darkgreen; font-size: small; };
+
+.btn-rc { width: 87px; max-height: 34px; }
+.btn-rc i { font-size: 15px; left: -30px; top: 5px; position: relative; }
+.btn-rc div { position: relative; top: -19px; left: 5px; font-size: 9px; line-height: 0.7625rem; }
+
+</style>
+<div id="appUsers">
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Gestión de Usuarios
+                    <small class="text-muted">Roles y Contraseñas</small>
+                    </h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <ul class="breadcrumb float-md-right">
+                        <!-- <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li> -->
+                        <li class="breadcrumb-item"> <a href="{% url 'security:home_security' %}"><i class="zmdi zmdi-home"></i> Seguridad</a> </li>
+                        <li class="breadcrumb-item active">Usuarios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="page-loader-wrapper import">
+                <div class="loader">
+                    <div class="m-t-30"><img class="zmdi-hc-spin" src="{% static 'img/logo.svg' %}" width="48" height="48" alt="Compass"></div>
+                    <p>Importando...</p>
+                </div>
+            </div>
+            <div class="page-loader-wrapper createuser">
+                <div class="loader">
+                    <div class="m-t-30"><img class="zmdi-hc-spin" src="{% static 'img/logo.svg' %}" width="48" height="48" alt="Compass"></div>
+                    <p>Creando Usuarios...</p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">                    
+                    <div class="row card-body">
+                        <a href="#" title="Importar Usuarios Lolcli" @click="importLolcli" class="btn btn-icon btn-info btn-simple btn-round btn-lg" style=" position: absolute; left: 10px; top: 0px;">
+                            {% csrf_token %}
+                            <i class="material-icons" style="position: relative; top: 2px; font-size: 33px;">redo</i>
+                            <span style="position: relative; top: -14px; font-size: 11px;">Importar</span>
+                        </a>
+                        <a href="#" title="Crear Usuario" data-toggle="modal" data-target="#ModalPerson" class="btn btn-icon btn-primary btn-simple btn-round btn-lg" style=" position: absolute; left: 80px; top: 0px;">
+                            <i class="material-icons" style="position: relative; top: 4px; font-size: 30px;">person_add</i>
+                            <span style="position: relative; top: -8px; font-size: 11px;">Agregar</span>
+                        </a>
+                        <div class="table-responsive table-sm">
+                            <table  id="demo-foo-addrow2" class="table titulo" data-page-size="12">
+                                <thead>
+                                    <tr>
+                                        <th>Nº</th>
+                                        <th>Doc. Identidad</th>
+                                        <th>Usuarios</th>
+                                        <th>Roles</th>
+                                        <th>Módulos</th>
+                                        <th class="text-center">Opciones</th>
+                                    </tr>
+                                </thead>
+                                <div class="d-flex">
+                                    <div class="ml-auto">
+                                        <div class="form-group">
+                                            <div class="form-control" id="inputbus">
+                                                <input id="demo-input-search2" type="text" placeholder="Buscar.." autocomplete="off">
+                                                <i class="material-icons" style="font-size:15px ">search</i>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <tbody>
+                                        
+                                    <tr v-for="(item, key)  in users" >
+                                        <th>[[ key + 1 ]]</th>
+                                        <td>[[ item.fields.docid]]</td>
+                                        <td>[[ item.fields.last_name0 ]] [[ item.fields.last_name1 ]] [[ item.fields.first_name ]]</td>
+                                        <td>
+                                            <template v-for='rol in item.fields.roles'>
+                                                <span class="text-uppercase" style="font-size: smaller; color: darkcyan;"> [[ rol.fields.name ]] </span>  <br>
+                                            </template>
+                                        </td>
+                                        <td>
+                                            <template v-for='mod in item.fields.modules'>
+                                                <span style="font-size: smaller; color: steelblue;"> [[ mod ]] </span> <br>
+                                            </template>
+                                        </td>
+                                       
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-warning btn-round btn-sm"  data-toggle="modal" data-target="#ModalR" @click="Roles(item, key)">
+                                                <i class="material-icons" style="font-size: 15px;">style</i><span style="position: relative;top: -2px;font-size: smaller;"> Roles</span>
+                                            </button>
+                                            <button class="btn btn-danger btn-round btn-sm btn-rc" @click="Pass(item, key)" style="width: 87px; max-height: 34px; ">
+                                                <i class="material-icons">vpn_key</i>
+                                                <div> Restablecer <br> Contraseña </div>
+                                            </button>
+                                            <!-- <button @click="activePeriod(item, key)"  class="btn btn-outline-success btn-circle btn-sm"><i class="fa fa-check"></i></button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="text-right">
+                                                <ul class="pagination pagination-split m-t-30"> </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  </tfoot>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="ModalR" class="modal fade"  role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mySmallModalLabel">Asignar Roles</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body"> 
+                    <div class="row" v-for="(detail,index) in roles">
+                        <div class="col-12 text-center">
+                            <label class="label-switch switch-info">
+                                <span class="text-muted ">[[detail.fields.name]]</span>
+
+                                {% csrf_token %}
+                                <input class="switch-square switch-bootstrap status " type="checkbox" @change="selectaccess(detail,index,detail.fields.user)" :checked="detail.fields.access" value="1">
+                                <span class="lable "></span>
+                            </label>
+                        </div>
+                            
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div id="ModalPerson" class="modal fade"  role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mySmallModalLabel">Nueva Persona</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body"> 
+                    <div class="row card-body" >
+                        <form method="POST" class="form-horizontal" id="form_signup" @submit.prevent="sendFormPerson" >
+                            {% csrf_token %}
+                            <div class="card" style="background:transparent;">
+                                <div class="row">
+                                    <div class="col-6" style="display: none;">
+                                        <label for="entity">Entidad</label>
+                                        {{ form.eid }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="typedoc">Tipo de Documento </label>
+                                        {{ form.typedoc }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="docid">Nro. de Documento </label>
+                                        {{ form.docid }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="last_name0">Apellido Paterno </label>
+                                        {{ form.last_name0 }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="last_name1">Apellido Materno </label>
+                                        {{ form.last_name1 }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="first_name">Nombres </label>
+                                        {{ form.first_name }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="sex">Sexo </label>
+                                        {{ form.sex }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="civil">Estado civil </label>
+                                        {{ form.civil }}
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="string optional" for="mail">Correo Electrónico </label>
+                                        {{ form.mail }}
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button id="regbtn" type="submit" class="btn btn-primary btn-round">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                            
+            </div> 
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <!-- <script src="{% static 'plugin/footable/js/footable-init.js' %}"></script> -->
+    <script src="{% static 'js/vue/users-vue.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#id_entity').val('1')
+
+            $('#regbtn').click(function(){
+                $('#id_entity').val('1');
+            });
+
+      });
+    </script>
+{% endblock scripts %}
+
+

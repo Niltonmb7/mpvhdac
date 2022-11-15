@@ -1,0 +1,173 @@
+{% extends "security/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+.btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+    border-width: 1px;
+    border-style: double;
+    background-color: transparent;
+}
+
+.btn-outline-info:hover {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:focus, .btn-outline-info.focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+
+.btn-outline-info.disabled, .btn-outline-info:disabled {
+  color: #17a2b8;
+  background-color: transparent;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:not(:disabled):not(.disabled).active,
+.show > .btn-outline-info.dropdown-toggle {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-info.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+
+.btn-outline-warning {
+  color: #ffc107;
+  border-color: #ffc107;
+  border-width: 1px;
+  border-style: double;
+  background-color: transparent;
+}
+
+.btn-outline-warning:hover {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-warning:focus, .btn-outline-warning.focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-outline-warning.disabled, .btn-outline-warning:disabled {
+  color: #ffc107;
+  background-color: transparent;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active,
+.show > .btn-outline-warning.dropdown-toggle {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled):active:focus, .btn-outline-warning:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+.btn-outline-success {
+  color: #28a745;
+  border-color: #28a745;
+  border-width: 1px;
+  border-style: double;
+  background-color: transparent;
+}
+
+.btn-outline-success:hover {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-outline-success:focus, .btn-outline-success.focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+.btn-outline-success.disabled, .btn-outline-success:disabled {
+  color: #28a745;
+  background-color: transparent;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active,
+.show > .btn-outline-success.dropdown-toggle {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled):active:focus, .btn-outline-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-success.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+
+</style>
+<div id="appSecurity">
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Gestión de Seguridad
+                    <small class="text-muted">Modulos, Roles, Usuarios</small>
+                    </h2>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <ul class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active">Seguridad</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- search -->
+            <div class="col-sm-12">
+                <div class="card">                    
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                          <div class="body">
+                              <a href="{% url 'security:modules' %}" class="btn btn-outline-success btn-round btn-lg btn-block waves-effect waves-light">
+                                  <img src="/static/img/modules.png" class="img-responsive" style="width: 80px" alt="profile-image">
+                                  <h6>GESTIÓN DE MÓDULOS</h6> 
+                              </a>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                            <div class="body">
+                                <a href="{% url 'security:roles' %}" class="btn btn-outline-warning btn-round btn-lg btn-block waves-effect waves-light">
+                                    <img src="/static/img/rolesper.png" class="img-responsive" style="width: 80px" alt="profile-image">
+                                    <h6>GESTIÓN DE ROLES Y PERMISOS</h6> 
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                            <div class="body">
+                                <a href="{% url 'security:users' %}" class="btn-outline-info btn-round btn-lg btn-block waves-effect waves-light">
+                                    <img src="/static/img/userset.png" class="img-responsive" style="width: 80px" alt="profile-image">
+                                    <h6>GESTIÓN DE USUARIOS</h6> 
+                                </a>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+

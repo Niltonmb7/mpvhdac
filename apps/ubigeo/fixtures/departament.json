@@ -1,0 +1,227 @@
+[
+{
+    "pk": 1, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Amazonas", 
+        "code": "010000", 
+        "country": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Ancash", 
+        "code": "020000", 
+        "country": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Apurimac", 
+        "code": "030000", 
+        "country": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Arequipa", 
+        "code": "040000", 
+        "country": 1
+    }
+},
+{
+    "pk": 5, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Ayacucho", 
+        "code": "050000", 
+        "country": 1
+    }
+},
+{
+    "pk": 6, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Cajamarca", 
+        "code": "060000", 
+        "country": 1
+    }
+},
+{
+    "pk": 7, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Callao", 
+        "code": "070000", 
+        "country": 1
+    }
+},
+{
+    "pk": 8, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Cusco", 
+        "code": "080000", 
+        "country": 1
+    }
+},
+{
+    "pk": 9, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Huancavelica", 
+        "code": "090000", 
+        "country": 1
+    }
+},
+{
+    "pk": 10, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Huanuco", 
+        "code": "100000", 
+        "country": 1
+    }
+},
+{
+    "pk": 11, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Ica", 
+        "code": "110000", 
+        "country": 1
+    }
+},
+{
+    "pk": 12, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Junin", 
+        "code": "120000", 
+        "country": 1
+    }
+},
+{
+    "pk": 13, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "La Libertad", 
+        "code": "130000", 
+        "country": 1
+    }
+},
+{
+    "pk": 14, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Lambayeque", 
+        "code": "140000", 
+        "country": 1
+    }
+},
+{
+    "pk": 15, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Lima", 
+        "code": "150000", 
+        "country": 1
+    }
+},
+{
+    "pk": 16, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Loreto", 
+        "code": "160000", 
+        "country": 1
+    }
+},
+{
+    "pk": 17, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Madre De Dios", 
+        "code": "170000", 
+        "country": 1
+    }
+},
+{
+    "pk": 18, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Moquegua", 
+        "code": "180000", 
+        "country": 1
+    }
+},
+{
+    "pk": 19, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Pasco", 
+        "code": "190000", 
+        "country": 1
+    }
+},
+{
+    "pk": 20, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Piura", 
+        "code": "200000", 
+        "country": 1
+    }
+},
+{
+    "pk": 21, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Puno", 
+        "code": "210000", 
+        "country": 1
+    }
+},
+{
+    "pk": 22, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "San Martin", 
+        "code": "220000", 
+        "country": 1
+    }
+},
+{
+    "pk": 23, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Tacna", 
+        "code": "230000", 
+        "country": 1
+    }
+},
+{
+    "pk": 24, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Tumbes", 
+        "code": "240000", 
+        "country": 1
+    }
+},
+{
+    "pk": 25, 
+    "model": "ubigeo.department", 
+    "fields": {
+        "name": "Ucayali", 
+        "code": "250000", 
+        "country": 1
+    }
+}
+]

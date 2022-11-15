@@ -1,0 +1,1373 @@
+{% extends "mpv/base.html" %} 
+{% load static %} 
+
+{% block content %}
+<style>
+    .z-index-5{
+        z-index: 55555;
+    }
+    #demo-input-search2 {
+        float: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        margin-left: 10px;
+        color: #67757c;
+    }
+ 
+    .footable .pagination li a {
+        position: relative;
+        display: block;
+        padding: .3rem .4rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #0275d8;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        font-size: 13px;
+    }
+
+    .footable .pagination li.active a {
+        z-index: 2;
+        color: #fff;
+        background-color: #0275d8;
+        border-color: #0275d8
+    }
+
+    .footable .pagination li.disabled a {
+        color: #636c72;
+        pointer-events: none;
+        cursor: not-allowed;
+        background-color: #ffffff;
+        border-color: #ddd
+    }
+
+    .footable .pagination li:first-child a {
+        margin-left: 0;
+        border-bottom-left-radius: .25rem;
+        border-top-left-radius: .25rem
+    }
+
+    .footable-odd {
+        background: #f2f4f8
+    }
+    
+    .btn-rc { width: 87px; max-height: 34px; }
+    .btn-rc i { font-size: 15px; left: -30px; top: 5px; position: relative; }
+    .btn-rc div { position: relative; top: -19px; left: 5px; font-size: 9px; line-height: 0.7625rem; }
+
+</style>
+
+<div id='listExpedient'>
+    <section class='content'>
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Lista de Expedientes
+                    <small class="text-muted">MESA DE PARTES VIRTUAL</small>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class='table-responsive table-sm'>
+                                    <table id="demo-foo-addrow2" class="table table-hover" data-page-size="10">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Tipo Persona</th>
+                                                <th>RUC</th>
+                                                <th>Razón Social</th>
+                                                <th>DNI</th>
+                                                <th>Apellidos y Nombres</th>
+                                                <th>Celular</th>
+                                                <th>Correo Electrónico</th>
+                                                <th>Documento</th>
+                                                <th>Fecha registro</th>
+                                                <th>N Expediente SGD</th>
+                                                <th>Fecha registro SGD</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <div class="d-flex">
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                <label for="date_begin">Desde</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="zmdi zmdi-calendar"></i>
+                                                    </span>
+                                                    <input type="text" id="date_begin" class="form-control dataspicker" v-on:change='filterDate'>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                                <label for="date_end">Hasta</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="zmdi zmdi-calendar"></i>
+                                                    </span>
+                                                    <input type="text" id="date_end" class="form-control dataspicker" v-on:change='filterDate'>
+                                                </div>
+                                            </div>
+                                            <div class="ml-auto">
+                                                <div class="form-group">
+                                                    <label for="demo-input-search2">Buscador</label>
+                                                    <div id="inputbus" class="input-group">
+                                                        <input id="demo-input-search2" class="form-control" type="text" placeholder="Buscar.." autocomplete="off">
+                                                        <span class="input-group-addon">
+                                                            <i class="zmdi zmdi-search"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <tbody>
+                                            <tr v-for="(expedient, index) in list_expedients">
+                                                <th scope="row">[[ index + 1 ]]</th>
+                                                <td>[[ expedient.fields.expedient.type_person ]]</td>
+                                                <td>[[ expedient.fields.expedient.j_ruc ]]</td>
+                                                <td>[[ expedient.fields.expedient.j_business_name ]]</td>
+                                                <td>[[ expedient.fields.expedient.n_dni ]]</td>
+                                                <td>[[ expedient.fields.expedient.n_last_name0 ]] [[ expedient.fields.expedient.n_last_name1 ]], [[ expedient.fields.expedient.n_first_name ]]</td>
+                                                <td>[[ expedient.fields.expedient.n_cellphone ]]</td>
+                                                <td>[[ expedient.fields.expedient.n_email ]]</td>
+                                                <td>[[ expedient.fields.document_name ]]</td>
+                                                <td>[[ expedient.fields.expedient.date_register ]]</td>
+                                                <td>[[ expedient.fields.expedient.sgd_expedient ]]</td>
+                                                <td>[[ expedient.fields.expedient.sgd_date_register ]]</td>
+                                                <td>
+                                                    <span class="badge badge-success" v-if="expedient.fields.expedient.state == 'SGD'">Registrado en SGD</span>
+                                                    <span class="badge badge-danger" v-if="expedient.fields.expedient.state == 'OBS'">Observado</span>
+                                                    <span class="badge badge-warning" v-if="expedient.fields.expedient.state == 'EMP'">Enviado a Mesa de Partes</span>
+                                                </td>
+                                                <td>
+                                                    {% if request.session.rol_active.pk == 8 %}
+                                                        <a href="##" @click="subsanarExpedient(expedient, index)" v-if="expedient.fields.expedient.state == 'OBS'"><i class="material-icons">create</i></a>
+                                                    {% endif %}
+                                                    <a href="##" @click="detailExpedient(expedient, index)"><i class="material-icons">library_books</i></a>
+                                                    {% if request.session.rol_active.pk == 3 %}
+                                                        <a href="##" @click="sendMailSGD(expedient, index)" v-show="(expedient.fields.expedient.state == 'SGD') && (expedient.fields.expedient.notified != true)"><i class="material-icons">email</i>[[expedient.fields.expedient.notified]]</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    Mostrando un total de [[ total_list ]] registros.
+                                                </td>
+                                                <td colspan="9">
+                                                    <div class="text-center">
+                                                        <ul class="pagination pagination-split m-t-30"> </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Dialogs --> 
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin: 12.75rem auto !important; max-width: 775px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title w-100 text-center" id="defaultModalLabel">Detalles</h4>
+                    <button type='button' class='btn btn-neutral btn-sm' data-dismiss="modal" @click='btn_closeModal' style='color: gray;'><i class="material-icons">clear</i>
+                    </button>
+                </div>
+                <div class="modal-body"> 
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="row clearfix">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="row clearfix">
+                                    <div class="col-6">
+                                        <b>Tipo Documento</b>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>[[ expedient.type_document.name ]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="row clearfix">
+                                    <div class="col-6">
+                                        <b>Número</b>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>[[ expedient.number ]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="row clearfix">
+                                    <div class="col-6">
+                                        <b>Folio</b>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>[[ expedient.folio ]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row clearfix">
+                                    <div class="col-2">
+                                        <b>Asunto</b>
+                                    </div>
+                                    <div class="col-10">
+                                        <p>[[ expedient.subject ]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row clearfix">
+                                    <div class="col-2">
+                                        <b>Documento Principal</b>
+                                    </div>
+                                    <div class="col-10">
+                                        <a :href='expedient.attached_route' download>
+                                            <i class="material-icons">file_download</i>
+                                            [[ expedient.attached_name ]]
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix" v-show='expedient.observation'>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row clearfix">
+                                    <div class="col-2">
+                                        <b>Observación</b>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class='text-danger'>[[ expedient.observation ]]</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <b>Fecha Actualización</b>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class='text-danger'>[[ formatDate(expedient.date_update) ]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <blockquote v-show='expedient.expedient.sgd_expedient' style='background-color: #eee;'>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row clearfix blockquote blockquote-default" style='border: none;'>
+                                    <div class="col-3">
+                                        <b>Expediente SGD</b>
+                                    </div>
+                                    <div class="col-3">
+                                        <p class='text-info'>[[ expedient.expedient.sgd_expedient ]]</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <b>Fecha registro SGD</b>
+                                    </div>
+                                    <div class="col-3">
+                                        <p class='text-info'>[[ expedient.expedient.sgd_date_register ]]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </blockquote>
+                        <div class="row clearfix" style='margin-top: 20px; margin-bottom: 25px;'>
+                            <div class='table-responsive table-sm'>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Documento Anexo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(anexo, index) in expedient.anexo_principal">
+                                            <th scope="row">[[ index + 1 ]]</th>
+                                            <td>[[ anexo.fields.name ]]</td>
+                                            <td>
+                                                <a :href='anexo.fields.route' download><i class="material-icons">file_download</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {% comment %} Formulario detalles {% endcomment %}
+                        {% if request.session.rol_active.pk == 3 %}
+                            <div class="row clearfix" v-show='expedient.expedient.state == "EMP"'>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="row clearfix">
+                                    <div class="col-12">
+                                        <label for="observation" class="my_label" style="margin-top: 10px;">Observaciones</label>
+                                        <div class="form-group">
+                                            <textarea id='observations' rows="4" class="form-control no-resize" v-on:keyup='changeInputs' v-model='ipt_observation'></textarea>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="row clearfix">
+                                        <div class="col-8">
+                                            <label for="expedient_sgd" class="my_label" style="margin-top: 10px;">Expediente SGD</label>
+                                            <div class="form-group">
+                                                <input type="text" id="expedient_sgd" class="form-control" v-on:keyup='changeInputs' v-model='ipt_expedient_sgd'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-8">
+                                            <label for="date_register_sgd" class="my_label" style="margin-top: 10px;">Fecha registro SGD</label>
+                                            <div class="form-group">
+                                                <input type="text" id="date_register_sgd" class="form-control datatimepicker">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <div class="row clearfix">
+                            <div class="col-md-12 col-lg-12">
+                                <div class='panel-group' id="accordion_1" role="tablist" aria-multiselectable="true">
+                                    <div v-for="(correct, index) in expedient.corrects">
+                                        
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading" role="tab" :id="'headingTwo_' + index">
+                                                <h4 class="panel-title"> 
+                                                    <a :class="[index == 0 ? '' : 'collapsed']" role="button" data-toggle="collapse" data-parent="#accordion_1" 
+                                                        :href="'#collapseTwo_' + index" :aria-expanded="[index == 0 ? 'true' : 'false']" :aria-controls="'collapseTwo_' + index"> 
+                                                        [[ correct.fields.document_name ]]
+                                                    </a> 
+                                                </h4>
+                                            </div>
+                                            <div :id="'collapseTwo_' + index" :class="[index == 0 ? 'panel-collapse collapse show' : 'panel-collapse collapse']" 
+                                                role="tabpanel" :aria-labelledby="'headingTwo_' + index">
+                                                <div class="panel-body" style='border-bottom: 3px solid #3c8ed0;'>
+
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                                            <div class="row clearfix">
+                                                                <div class="col-6">
+                                                                    <b>Tipo Documento</b>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <p>[[ correct.fields.type_document.name ]]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                                            <div class="row clearfix">
+                                                                <div class="col-6">
+                                                                    <b>Número</b>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <p>[[ correct.fields.number ]]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                                            <div class="row clearfix">
+                                                                <div class="col-6">
+                                                                    <b>Folio</b>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <p>[[ correct.fields.folio ]]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="row clearfix">
+                                                                <div class="col-2">
+                                                                    <b>Asunto</b>
+                                                                </div>
+                                                                <div class="col-10">
+                                                                    <p>[[ correct.fields.subject ]]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="row clearfix">
+                                                                <div class="col-2">
+                                                                    <b>Documento Principal</b>
+                                                                </div>
+                                                                <div class="col-10">
+                                                                    <a :href='correct.fields.attached_route' download>
+                                                                        <i class="material-icons">file_download</i>
+                                                                        [[ correct.fields.attached_name ]]
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix" v-show='correct.fields.observation'>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="row clearfix">
+                                                                <div class="col-2">
+                                                                    <b>Observación</b>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <p class='text-danger'>[[ correct.fields.observation ]]</p>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <b>Fecha Actualización</b>
+                                                                </div>
+                                                                <div class="col-4">
+                                                                    <p class='text-danger'>[[ formatDate(correct.fields.date_update) ]]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row clearfix" style='margin-top: 20px;'>
+                                                        <div class='table-responsive table-sm'>
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>#</th>
+                                                                        <th>Documento Anexo</th>
+                                                                        <th>Acciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr v-for="(anexo_, index_) in correct.fields.anexo_principal">
+                                                                        <th scope="row">[[ index_ + 1 ]]</th>
+                                                                        <td>[[ anexo_.fields.name ]]</td>
+                                                                        <td>
+                                                                            <a :href='anexo_.fields.route' download><i class="material-icons">file_download</i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {% if request.session.rol_active.pk == 3 %}
+                        <button type="button" class="btn btn-info btn-round waves-effect" @click='saveModal' v-show='expedient.expedient.state == "EMP"'>Guardar</button>
+                    {% endif %}
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal" @click='btn_closeModal'>Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="defaultSubsanarModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin: 12.75rem auto !important; max-width: 775px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title w-100 text-center" id="defaultSubsanarModalLabel">Subsanar Observación</h4>
+                    <button type='button' class='btn btn-neutral btn-sm' data-dismiss="modal" @click='btn_closeModal' style='color: gray;'><i class="material-icons">clear</i>
+                </div>
+                <form @submit.prevent="saveSubsanarExpedient" class="form-horizontal" method="post">
+                {% csrf_token %}
+                <div class="modal-body"> 
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <div class="row clearfix">
+                            <div class="col-md-12 col-lg-12">
+                                <div class='panel-group' id="accordion_2" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" role="tab" id="headingTwo_x">
+                                            <h4 class="panel-title"> 
+                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_2" 
+                                                    href="#collapseTwo_x" aria-expanded="false" aria-controls="collapseTwo_x"> 
+                                                    Ver documento a Subsanar
+                                                </a> 
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo_x" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_x">
+                                            <div class="panel-body" style='border-bottom: 3px solid #3c8ed0;'>
+
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                                        <div class="row clearfix">
+                                                            <div class="col-6">
+                                                                <b>Tipo Documento</b>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p>[[ expedient.type_document.name ]]</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                                        <div class="row clearfix">
+                                                            <div class="col-6">
+                                                                <b>Número</b>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p>[[ expedient.number ]]</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                                        <div class="row clearfix">
+                                                            <div class="col-6">
+                                                                <b>Folio</b>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p>[[ expedient.folio ]]</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="row clearfix">
+                                                            <div class="col-2">
+                                                                <b>Asunto</b>
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <p>[[ expedient.subject ]]</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="row clearfix">
+                                                            <div class="col-2">
+                                                                <b>Documento Principal</b>
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <a :href='expedient.attached_route' download>
+                                                                    <i class="material-icons">file_download</i>
+                                                                    [[ expedient.attached_name ]]
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <div class="row clearfix">
+                                                            <div class="col-2">
+                                                                <b>Observación</b>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <p class='text-danger'>[[ expedient.observation ]]</p>
+                                                            </div>
+                                                            <div class="col-2">
+                                                                <b>Fecha Actualización</b>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <p class='text-danger'>[[ formatDate(expedient.date_update) ]]</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix" style='margin-top: 20px;'>
+                                                    <div class='table-responsive table-sm'>
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Documento Anexo</th>
+                                                                    <th>Acciones</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="(anexo_, index_) in expedient.anexo_principal">
+                                                                    <th scope="row">[[ index_ + 1 ]]</th>
+                                                                    <td>[[ anexo_.fields.name ]]</td>
+                                                                    <td>
+                                                                        <a :href='anexo_.fields.route' download><i class="material-icons">file_download</i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row clearfix">
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <label for="type_document" class="my_label" style="margin-top: 10px;">Tipo de Documento:</label>
+                                <div class="">
+                                    {{ form_document.type_document }}
+                                </div>
+
+                                <label for="number" class="my_label" style="margin-top: 10px;">Número</label>
+                                <div class="form-group">
+                                    {{ form_document.number }}
+                                </div>
+
+                                <label for="folio" class="my_label" style="margin-top: 10px;">Folio</label>
+                                <div class="form-group">
+                                    {{ form_document.folio }}
+                                </div>
+
+                                {% comment %} <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <label for="number" class="my_label" style="margin-top: 10px;">Número</label>
+                                        <div class="form-group">
+                                            {{ form_document.number }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <label for="folio" class="my_label" style="margin-top: 10px;">Folio</label>
+                                        <div class="form-group">
+                                            {{ form_document.folio }}
+                                        </div>
+                                    </div>
+                                </div> {% endcomment %}
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <label for="subject" class="my_label" style="margin-top: 10px;">Asunto</label>
+                                <div class="form-group">
+                                    {{ form_document.subject }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <label for="file_principal" class="my_label" style="margin-top: 10px;">Documento Principal</label>
+                                <div class="form-group">
+                                    <input type='file' id='file_principal' accept="application/pdf" class='form-control' style="max-width: 100%" v-on:change='changeFilePrincipal'>
+                                </div>
+                            </div>
+
+                            {{ form_document.attached_name }}
+                            {{ form_document.attached_route }}
+                        </div>
+
+                        <div class="row clearfix" style='margin-top: 20px; margin-bottom: 25px;'>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class='table-responsive table-sm'>
+                                    <table class="table table-hover m-b-0 c_list footable footable-1 footable-paging footable-paging-center breakpoint-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Documento Principal</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(attached, index) in list_attached">
+                                                <th scope="row">[[ index + 1 ]]</th>
+                                                <td>[[ attached.filename ]]</td>
+                                                <td>
+                                                    <i class="material-icons">trash</i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <label for="file_anexo" class="my_label" style="margin-top: 10px;">Documentos Anexos</label>
+                                <div class="form-group">
+                                    <input type='file' id='file_anexo' accept="application/pdf" class='form-control' style="max-width: 100%" v-on:change='changeFileAnexo'>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix" style='margin-top: 20px; margin-bottom: 25px;'>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class='table-responsive table-sm'>
+                                    <table class="table table-hover m-b-0 c_list footable footable-1 footable-paging footable-paging-center breakpoint-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Documento Anexo</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(attached, index) in list_attached_anexo">
+                                                <th scope="row">[[ index + 1 ]]</th>
+                                                <td>[[ attached.filename ]]</td>
+                                                <td>
+                                                    <i class="material-icons">trash</i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info btn-round waves-effect">Guardar</button>
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal" @click='btn_closeModal'>Cerrar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    const list = new Vue({
+        delimiters: ['[[',']]'],
+        el: '#listExpedient',
+        data: {
+            quantity_adjunt: 0,
+            date_bagin: '',
+            date_end: '',
+            index_: '',
+            list_expedients: {},
+            total_page: 0,
+            total_list: 0,
+            expedient: {
+                type_document: {},
+                corrects: [],
+                expedient: {}
+            },
+            ipt_state: '',
+            ipt_observation: '',
+            ipt_expedient_sgd: '',
+            ipt_expedient_date_sgd: '',
+            form_document: {
+                    attached_name: '',
+                    attached_route: '',
+                },
+            list_attached: [],
+            list_attached_anexo: [],
+        },
+
+        created: function () {
+            this.listExpedient();
+            this.footable();
+        },
+
+        methods: {
+            paginations() {
+                if($('#demo-input-search2').val() != '') {
+                    this.total_list = $('#demo-foo-addrow2 tbody tr:not(.footable-filtered)').length;
+                }else{
+                    this.total_list = this.list_expedients.length;
+                }
+            },
+
+            footable(){
+                self = this;
+                $(window).on('load', function() {
+
+                    // Row Toggler
+                    // -----------------------------------------------------------------
+                    $('#demo-foo-row-toggler').footable();
+                
+                    // Accordion
+                    // -----------------------------------------------------------------
+                    $('#demo-foo-accordion').footable().on('footable_row_expanded', function(e) {
+                        $('#demo-foo-accordion tbody tr.footable-detail-show').not(e.row).each(function() {
+                            $('#demo-foo-accordion').data('footable').toggleDetail(this);
+                        });
+                    });
+                
+                    // Pagination
+                    // -----------------------------------------------------------------
+                    $('#demo-foo-pagination').footable();
+                    $('#demo-show-entries').change(function (e) {
+                        e.preventDefault();
+                        var pageSize = $(this).val();
+                        $('#demo-foo-pagination').data('page-size', pageSize);
+                        $('#demo-foo-pagination').trigger('footable_initialized');
+                    });
+                
+                    // Filtering
+                    // -----------------------------------------------------------------
+                    var filtering = $('#demo-foo-filtering');
+                    filtering.footable().on('footable_filtering', function (e) {
+                        var selected = $('#demo-foo-filter-status').find(':selected').val();
+                        e.filter += (e.filter && e.filter.length > 0) ? ' ' + selected : selected;
+                        e.clear = !e.filter;
+                    });
+                
+                    // Filter status
+                    $('#demo-foo-filter-status').change(function (e) {
+                        e.preventDefault();
+                        filtering.trigger('footable_filter', {filter: $(this).val()});
+                    });
+                
+                    // Search input
+                    $('#demo-foo-search').on('input', function (e) {
+                        e.preventDefault();
+                        filtering.trigger('footable_filter', {filter: $(this).val()});
+                    });
+                
+                    // Search input
+                    $('#demo-input-search2').on('input', function (e) {
+                        e.preventDefault();
+                        addrow.trigger('footable_filter', {filter: $(this).val()});
+                        self.paginations();
+                    });
+                    
+                    // Add & Remove Row
+                    var addrow = $('#demo-foo-addrow');
+                    addrow.footable().on('click', '.delete-row-btn', function() {
+                
+                        //get the footable object
+                        var footable = addrow.data('footable');
+                
+                        //get the row we are wanting to delete
+                        var row = $(this).parents('tr:first');
+                
+                        //delete the row
+                        footable.removeRow(row);
+                    });
+                    var addrow = $('#demo-foo-addrow2');
+                    addrow.footable().on('click', '.delete-row-btn', function() {
+                
+                        //get the footable object
+                        var footable = addrow.data('footable');
+                
+                        //get the row we are wanting to delete
+                        var row = $(this).parents('tr:first');
+                
+                        //delete the row
+                        footable.removeRow(row);
+                    });
+                    // Add Row Button
+                    // $('#demo-btn-addrow').click(function() {
+                
+                    //     //get the footable object
+                    //     var footable = addrow.data('footable');
+                        
+                    //     //build up the row we are wanting to add
+                    //     var newRow = '<tr><td>thome</td><td>Woldt</td><td>Airline Transport Pilot</td><td>3 Oct 2016</td><td><span class="label label-table label-success">Active</span></td><td><button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Delete"><i class="ti-close" aria-hidden="true"></i></button></td></tr>';
+                
+                    //     //add it
+                    //     footable.appendRow(newRow);
+                    // });
+                });
+            },
+
+            formatDate(dat) {
+                if (dat) {
+                    return moment(dat).format('YYYY-MM-DD HH:mm:ss');
+                }
+            },
+
+            isNumber: function(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if ((charCode > 31 && (charCode < 48 || charCode > 57)) ) {
+                    evt.preventDefault();;
+                } else {
+                    return true;
+                }
+            },
+
+            isMayus(e) {
+                var dat = this.form_document.number;
+                this.form_document.number = dat.toUpperCase();
+            },
+
+            btn_closeModal() {
+                this.form_document = {
+                        attached_name: '',
+                        attached_route: '',
+                    };
+                this.list_attached = [];
+                this.list_attached_anexo = [];
+                this.expedient = {
+                                type_document: {},
+                                corrects: [],
+                                expedient: {}
+                                };
+                this.index_ = '';
+                this.ipt_state = '',
+                this.ipt_observation = '',
+                this.ipt_expedient_sgd = '',
+                this.ipt_expedient_date_sgd = '',
+                $("#date_register_sgd").val('');
+                $("#file_principal").attr('disabled', false);
+                $("#file_anexo").attr('disabled', false);
+                $('#expedient_sgd').attr('disabled', false);
+                $('#date_register_sgd').attr('disabled', false);
+                $('#observations').attr('disabled', false);
+
+                setTimeout(() => $('.show-tick').selectpicker('refresh'));
+            },
+
+            getAdjunt(response) {
+                $.each(response.data, function(index, value){
+                    var doc = response.data[index].fields.attached_name;
+                    var document_id = doc.split('.');
+
+                    axios.get('api/', {
+                        params: {
+                            id: document_id[0]
+                        }
+                    })
+                    .then(function (respuesta) {
+                        if (respuesta.status == 200){
+                            if (respuesta.data.length > 0) {
+                                response.data[index].fields.anexo_principal = respuesta.data;
+                            } else {
+                                response.data[index].fields.anexo_principal = [];
+                            }
+                        }
+                    });
+                });
+                return response;
+            },
+
+            getCorrect(response) {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var self = this;
+
+                $.each(response.data, function(index, value){
+                    var frmData = new FormData();
+                    frmData.append('expedient_id', response.data[index].fields.expedient.expedient_id);
+                    
+                    axios({ 
+                        headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                        method: 'POST',
+                        url: 'getCorrect/',
+                        data: frmData
+                    }).then((respuesta) => {
+                        if (respuesta.status == 200){
+                            if (respuesta.data.length > 0) {
+                                var response_adj__ = self.getAdjunt(respuesta);
+                                
+                                response.data[index].fields.corrects = response_adj__.data;
+                            } else {
+                                response.data[index].fields.corrects = [];
+                            }
+                        }
+                    }).catch(er => {
+                        console.log(er)
+                        swal("Información!", er);
+                    });
+                });
+                return response;
+            },
+
+            filterDate() {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                $(".page-loader-wrapper").css({"display": "block", "background": "#acadce40"});
+                var frmData = new FormData();
+                frmData.append('date_begin', this.date_begin);
+                frmData.append('date_end', this.date_end);
+                
+                axios({ 
+                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                    method: 'POST',
+                    url: 'filterDate/',
+                    data: frmData
+                }).then((response) => {
+                    if (response.status == 200) {
+                        if (response.data.length > 0){ 
+                            var response_adjunt = this.getAdjunt(response);
+                            var response_corrects = this.getCorrect(response_adjunt);
+                            this.list_expedients = response_corrects.data;
+                            //this.total_list = this.list_expedients.length;
+                        }else{
+                            this.list_expedients = {};
+                            //this.total_list = 0;
+                        }
+                        this.paginations();
+                    }
+                    $(".page-loader-wrapper").css("display", "none");
+                    $(".page-loader-wrapper").stop();
+                    setTimeout(() =>{
+                        $('#demo-foo-addrow2').trigger('footable_redraw');
+                    },120);
+                }).catch(er => {
+                    console.log(er)
+                    swal("Información!", er);
+                });
+            },
+
+            listExpedient() {
+                axios({ method: 'get', url: 'api/', responseType: 'json' })
+                .then((response) => {
+                    if (response.status == 200){
+                        if (response.data.length > 0){
+                            var response_adjunt = this.getAdjunt(response);
+                            var response_corrects = this.getCorrect(response_adjunt);
+                            this.list_expedients = response_corrects.data;
+                            //this.total_list = this.list_expedients.length;
+                        }else{
+                            this.list_expedients = {};
+                            //this.total_list = 0;
+                        }
+                        this.paginations();
+                    }
+                    setTimeout(() =>{
+                        $('#demo-foo-addrow2').trigger('footable_redraw');
+                    },120);
+                })
+            },
+
+            detailExpedient(expedient, index) {
+                this.expedient = expedient.fields;
+                this.index_ = index;
+                $("#defaultModal").modal('show');
+            },
+
+            subsanarExpedient(expedient, index) {
+                this.expedient = expedient.fields;
+                this.index_ = index;
+                $("#defaultSubsanarModal").modal('show');
+            },
+
+            sendMailSGD(expedient, index) {
+                self = this;
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var frmData = new FormData();
+                frmData.append('expedient_id', expedient.fields.expedient.expedient_id);
+                frmData.append('document_name', expedient.fields.document_name);
+                frmData.append('sgd_expedient', expedient.fields.expedient.sgd_expedient);
+                frmData.append('sgd_date_register', expedient.fields.expedient.sgd_date_register);
+
+                swal({
+                    title: "Mensaje de Confirmación",
+                    text: "Enviar el mensaje de confirmación de registro en el SGD?",
+                    type: "info",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonText: "Enviar",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true,
+                }, function () {
+                    axios({ 
+                        headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                        method: 'POST',
+                        url: 'sendMail/',
+                        data: frmData
+                    }).then((response) => {
+                        if (response.status == 200) {
+                            self.list_expedients[index].fields.expedient.notified = true;
+
+                            swal({
+                                title: "Información!",
+                                text: "Se envió el mensaje de confirmación de registro en el SGD!",
+                                type: "success",
+                                timer: 2022,
+                                showConfirmButton: false
+                            });
+                        }
+                    }).catch(er => {
+                        console.log(er)
+                        swal("Información!", er);
+                    });
+                });
+            },
+
+            changeInputs() {
+                if (this.ipt_observation) {
+                    this.ipt_state = 'OBS';
+                    $('#expedient_sgd').attr('disabled', true);
+                    $('#date_register_sgd').attr('disabled', true);
+                }else{
+                    if (this.ipt_expedient_sgd || this.ipt_expedient_date_sgd) {
+                        this.ipt_state = 'SGD';
+                        $('#observations').attr('disabled', true);
+                    }else{
+                        this.ipt_state = '';
+                        $('#expedient_sgd').attr('disabled', false);
+                        $('#date_register_sgd').attr('disabled', false);
+                        $('#observations').attr('disabled', false);
+                    }
+                }
+            },
+
+            saveModal() {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+
+                if (this.ipt_state == '') {
+                    swal("Información!", 'Ingrese los campos obligatorios.');
+                    return false;
+                }else{
+                    if (this.ipt_state == 'OBS' && this.ipt_observation == '') {
+                        swal("Información!", 'Ingrese los campos obligatorios.');
+                        return false;
+                    }else{
+                        if (this.ipt_state == 'SGD') {
+                            if (this.ipt_expedient_sgd == '' || this.ipt_expedient_date_sgd == '') {
+                                swal("Información!", 'Ingrese los campos obligatorios.');
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                var doc = this.expedient.attached_name;
+                var document_id = doc.split('.')
+                
+                $(".page-loader-wrapper").css({"display": "block", "background": "#acadce40"});
+                var frmData = new FormData();
+                frmData.append('type_post', 'MP');
+                frmData.append('expedient_id', this.expedient.expedient.expedient_id);
+                frmData.append('document_id', document_id[0]);
+                frmData.append('state', this.ipt_state);
+                frmData.append('sgd_expedient', this.ipt_expedient_sgd);
+                frmData.append('sgd_date_register', this.ipt_expedient_date_sgd);
+                frmData.append('observation', this.ipt_observation);
+                
+                axios({ 
+                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                    method: 'POST',
+                    url: 'api/',
+                    data: frmData
+                }).then((response) => {
+                    if (response.status == 200) {
+                        console.log(response)
+                        
+                        var response_adjunt = this.getAdjunt(response);
+                        var response_corrects = this.getCorrect(response_adjunt);
+                        this.list_expedients[this.index_] = response_corrects.data[0];
+
+                        this.expedient = {
+                                        type_document: {},
+                                        corrects: [],
+                                        expedient: {}
+                                        };
+                        this.index_ = '';
+                        this.ipt_state = '',
+                        this.ipt_observation = '',
+                        this.ipt_expedient_sgd = '',
+                        this.ipt_expedient_date_sgd = '',
+                        $("#date_register_sgd").val('');
+                        
+                        $(".page-loader-wrapper").css("display", "none");
+                        $(".page-loader-wrapper").stop();
+                        $("#defaultModal").modal('hide');
+                    }
+                }).catch(er => {
+                    console.log(er)
+                    swal("Información!", er);
+                });
+                
+            },
+
+            changeFilePrincipal(event) {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var ext = $('#file_principal').val().split('.').pop();
+
+                if (ext == "pdf") {
+                    var files = event.target.files
+                    
+                    if (files.length > 0) {
+                        if (files[0].size > 10000000) {
+                            $("#file_principal").val('');
+                            swal("Información!", 'El archivo PDF no debe superar los 10mb.');
+                        }else{
+                            var formData = new FormData();
+                            formData.append('file_', files[0]);
+
+                            axios({
+                                headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                                method: 'POST',
+                                url: 'api/',
+                                data: formData
+                            }).then(response => {
+                                if(response.status == 200){
+                                    console.log(response)
+                                    $("#file_principal").val('');
+                                    $("#file_principal").attr('disabled', true);
+                                    this.list_attached.push(response.data);
+                                    this.form_document.attached_name = response.data['filename'];
+                                    this.form_document.attached_route = response.data['file_url'];
+                                }
+                            }).catch(er => {
+                                console.log(er)
+                                swal("Información!", er);
+                            })
+                        }
+                    }
+                }
+            },
+
+            changeFileAnexo(event) {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var ext = $('#file_anexo').val().split('.').pop();
+
+                if (ext == "pdf") {
+                    var files = event.target.files
+                    
+                    if (files.length > 0) {
+                        if (files[0].size > 10000000) {
+                            $("#file_anexo").val('');
+                            swal("Información!", 'El archivo PDF no debe superar los 10mb.');
+                        }else{
+                            if (this.list_attached_anexo.length == this.quantity_adjunt) {
+                                $("#file_anexo").val('');
+                                $("#file_anexo").attr('disabled', true);
+                                swal("Información!", 'Solo se pueden cargar hasta ' + this.quantity_adjunt + ' anexos.');
+                            }else{
+                                var formData = new FormData();
+                                formData.append('file_', files[0]);
+
+                                axios({
+                                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                                    method: 'POST',
+                                    url: 'api/',
+                                    data: formData
+                                }).then(response => {
+                                    if(response.status == 200){
+                                        console.log(response)
+                                        $("#file_anexo").val('');
+                                        this.list_attached_anexo.push(response.data);
+                                    }
+                                }).catch(er => {
+                                    console.log(er)
+                                    swal("Información!", er);
+                                })
+                            }
+                        }
+                    }
+                }
+            },
+
+            saveSubsanarExpedient(event) {
+                $(".page-loader-wrapper").css({"display": "block", "background": "#acadce40"});
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                var frmData = new FormData(event.target);
+                frmData.append('type_post', 'AD');
+                frmData.append('expedient_id', this.expedient.expedient.expedient_id);
+                frmData.append('file_anexo', JSON.stringify(this.list_attached_anexo));
+
+                axios({
+                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                    method: 'POST',
+                    url: 'api/',
+                    data: frmData
+                }).then(response => {
+                    if(response.status == 200){
+                        console.log(response)
+
+                        var response_adjunt = this.getAdjunt(response);
+                        var response_corrects = this.getCorrect(response_adjunt);
+                        this.list_expedients[this.index_] = response_corrects.data[0];
+
+                        this.form_document = {
+                                attached_name: '',
+                                attached_route: '',
+                            };
+                        this.list_attached = [];
+                        this.list_attached_anexo = [];
+                        this.expedient = {
+                                        type_document: {},
+                                        corrects: [],
+                                        expedient: {}
+                                        };
+                        this.index_ = '';
+                        $("#file_principal").attr('disabled', false);
+                        $("#file_anexo").attr('disabled', false);
+
+                        swal({
+                            title: "Información!",
+                            text: "Se registró correctamente!",
+                            type: "success",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                        $(".page-loader-wrapper").css("display", "none");
+                        $(".page-loader-wrapper").stop();
+                        $("#defaultSubsanarModal").modal('hide');
+                    }
+                }).catch(er => {
+                    console.log(er)
+                    swal("Información!", er);
+                })
+            }
+        }
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+        const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
+        $('#date_begin').val(startOfMonth);
+        $('#date_end').val(endOfMonth);
+
+        $('.datatimepicker').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD HH:mm:00',
+            clearButton: true,
+            weekStart: 1,
+            clearText: 'Limpiar',
+            cancelText: 'Cancelar'
+        });
+
+        $('.dataspicker').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD',
+            clearButton: true,
+            weekStart: 1,
+            time: false,
+            clearText: 'Limpiar',
+            cancelText: 'Cancelar'
+        });
+
+        $('#defaultModal').on('hidden.bs.modal', function () {
+            list.btn_closeModal();
+        });
+
+        $('#defaultSubsanarModal').on('hidden.bs.modal', function () {
+            list.btn_closeModal();
+        });
+
+        $('#date_begin, #date_end').change(function() {
+            list.date_begin = $('#date_begin').val();
+            list.date_end = $('#date_end').val();
+            list.filterDate();
+        })
+
+        $("#date_register_sgd").change(function(){
+            var date_selected = $(this).val();
+            var exp_sgd_selected = $('#expedient_sgd').val();
+            list.ipt_expedient_date_sgd = date_selected;
+
+            if (date_selected == '' && exp_sgd_selected == '') {
+                $('#observations').attr('disabled', false);
+            } else {
+                $('#observations').attr('disabled', true);
+            }
+            
+        })
+
+        var quan_adjunt = '{{ quantity_adjunt }}';
+        if (quan_adjunt) {
+            list.quantity_adjunt = quan_adjunt;
+        }else {
+            list.quantity_adjunt = 0;
+        }
+    });
+</script>
+{% endblock scripts %}

@@ -1,0 +1,1994 @@
+[
+{
+    "pk": 1, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Per\u00fa", 
+        "code": "PE"
+    }
+},
+{
+    "pk": 2, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Brasil", 
+        "code": "BR"
+    }
+},
+{
+    "pk": 3, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Afganistan", 
+        "code": "AF"
+    }
+},
+{
+    "pk": 4, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas \u00e5land", 
+        "code": "AX"
+    }
+},
+{
+    "pk": 5, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Albania", 
+        "code": "AL"
+    }
+},
+{
+    "pk": 6, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Alemania", 
+        "code": "DE"
+    }
+},
+{
+    "pk": 7, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Andorra", 
+        "code": "AD"
+    }
+},
+{
+    "pk": 8, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Angola", 
+        "code": "AO"
+    }
+},
+{
+    "pk": 9, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Anguila", 
+        "code": "AI"
+    }
+},
+{
+    "pk": 10, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Antartida", 
+        "code": "AQ"
+    }
+},
+{
+    "pk": 11, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Antigua y barbuda", 
+        "code": "AG"
+    }
+},
+{
+    "pk": 12, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Arabia saudita", 
+        "code": "SA"
+    }
+},
+{
+    "pk": 13, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Argelia", 
+        "code": "DZ"
+    }
+},
+{
+    "pk": 14, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Argentina", 
+        "code": "AR"
+    }
+},
+{
+    "pk": 15, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Armenia", 
+        "code": "AM"
+    }
+},
+{
+    "pk": 16, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Aruba", 
+        "code": "AW"
+    }
+},
+{
+    "pk": 17, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Australia", 
+        "code": "AU"
+    }
+},
+{
+    "pk": 18, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Austria", 
+        "code": "AT"
+    }
+},
+{
+    "pk": 19, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Azerbaiyan", 
+        "code": "AZ"
+    }
+},
+{
+    "pk": 20, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bahamas", 
+        "code": "BS"
+    }
+},
+{
+    "pk": 21, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Banglades", 
+        "code": "BD"
+    }
+},
+{
+    "pk": 22, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Barbados", 
+        "code": "BB"
+    }
+},
+{
+    "pk": 23, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Barein", 
+        "code": "BH"
+    }
+},
+{
+    "pk": 24, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Belgica", 
+        "code": "BE"
+    }
+},
+{
+    "pk": 25, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Belice", 
+        "code": "BZ"
+    }
+},
+{
+    "pk": 26, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Benin", 
+        "code": "BJ"
+    }
+},
+{
+    "pk": 27, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bermudas", 
+        "code": "BM"
+    }
+},
+{
+    "pk": 28, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bielorrusia", 
+        "code": "BY"
+    }
+},
+{
+    "pk": 29, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Myanmar [nota 1]", 
+        "code": "MM"
+    }
+},
+{
+    "pk": 30, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bolivia, estado plurinacional de", 
+        "code": "BO"
+    }
+},
+{
+    "pk": 31, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bosnia y herzegovina", 
+        "code": "BA"
+    }
+},
+{
+    "pk": 32, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Botsuana", 
+        "code": "BW"
+    }
+},
+{
+    "pk": 33, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Brunei darussalam", 
+        "code": "BN"
+    }
+},
+{
+    "pk": 34, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bulgaria", 
+        "code": "BG"
+    }
+},
+{
+    "pk": 35, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Burkina faso", 
+        "code": "BF"
+    }
+},
+{
+    "pk": 36, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Burundi", 
+        "code": "BI"
+    }
+},
+{
+    "pk": 37, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Butan", 
+        "code": "BT"
+    }
+},
+{
+    "pk": 38, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Cabo verde", 
+        "code": "CV"
+    }
+},
+{
+    "pk": 39, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Camboya", 
+        "code": "KH"
+    }
+},
+{
+    "pk": 40, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Camerun", 
+        "code": "CM"
+    }
+},
+{
+    "pk": 41, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Canada", 
+        "code": "CA"
+    }
+},
+{
+    "pk": 42, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Qatar", 
+        "code": "QA"
+    }
+},
+{
+    "pk": 43, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Bonaire, san eustaquio y saba", 
+        "code": "BQ"
+    }
+},
+{
+    "pk": 44, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Chad", 
+        "code": "TD"
+    }
+},
+{
+    "pk": 45, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Chile", 
+        "code": "CL"
+    }
+},
+{
+    "pk": 46, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "China, republica popular", 
+        "code": "CN"
+    }
+},
+{
+    "pk": 47, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Chipre", 
+        "code": "CY"
+    }
+},
+{
+    "pk": 48, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Colombia", 
+        "code": "CO"
+    }
+},
+{
+    "pk": 49, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Comoras", 
+        "code": "KM"
+    }
+},
+{
+    "pk": 50, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Corea, republica democratica popular de", 
+        "code": "KP"
+    }
+},
+{
+    "pk": 51, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Corea, republica de", 
+        "code": "KR"
+    }
+},
+{
+    "pk": 52, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Costa de marfil", 
+        "code": "CI"
+    }
+},
+{
+    "pk": 53, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Costa rica", 
+        "code": "CR"
+    }
+},
+{
+    "pk": 54, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Croacia", 
+        "code": "HR"
+    }
+},
+{
+    "pk": 55, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Cuba", 
+        "code": "CU"
+    }
+},
+{
+    "pk": 56, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Curazao", 
+        "code": "CW"
+    }
+},
+{
+    "pk": 57, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Dinamarca", 
+        "code": "DK"
+    }
+},
+{
+    "pk": 58, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Dominica", 
+        "code": "DM"
+    }
+},
+{
+    "pk": 59, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Ecuador", 
+        "code": "EC"
+    }
+},
+{
+    "pk": 60, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Egipto", 
+        "code": "EG"
+    }
+},
+{
+    "pk": 61, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "El salvador", 
+        "code": "SV"
+    }
+},
+{
+    "pk": 62, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Emiratos arabes unidos", 
+        "code": "AE"
+    }
+},
+{
+    "pk": 63, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Eritrea", 
+        "code": "ER"
+    }
+},
+{
+    "pk": 64, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Eslovaquia", 
+        "code": "SK"
+    }
+},
+{
+    "pk": 65, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Eslovenia", 
+        "code": "SI"
+    }
+},
+{
+    "pk": 66, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Espa\u00f1a", 
+        "code": "ES"
+    }
+},
+{
+    "pk": 67, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Estados unidos", 
+        "code": "US"
+    }
+},
+{
+    "pk": 68, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Estonia", 
+        "code": "EE"
+    }
+},
+{
+    "pk": 69, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Etiopia", 
+        "code": "ET"
+    }
+},
+{
+    "pk": 70, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Filipinas", 
+        "code": "PH"
+    }
+},
+{
+    "pk": 71, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Finlandia", 
+        "code": "FI"
+    }
+},
+{
+    "pk": 72, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Fiyi", 
+        "code": "FJ"
+    }
+},
+{
+    "pk": 73, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Francia", 
+        "code": "FR"
+    }
+},
+{
+    "pk": 74, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Gabon", 
+        "code": "GA"
+    }
+},
+{
+    "pk": 75, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Gambia", 
+        "code": "GM"
+    }
+},
+{
+    "pk": 76, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Georgia", 
+        "code": "GE"
+    }
+},
+{
+    "pk": 77, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Ghana", 
+        "code": "GH"
+    }
+},
+{
+    "pk": 78, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Gibraltar", 
+        "code": "GI"
+    }
+},
+{
+    "pk": 79, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Granada", 
+        "code": "GD"
+    }
+},
+{
+    "pk": 80, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Grecia", 
+        "code": "GR"
+    }
+},
+{
+    "pk": 81, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Groenlandia", 
+        "code": "GL"
+    }
+},
+{
+    "pk": 82, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guadalupe", 
+        "code": "GP"
+    }
+},
+{
+    "pk": 83, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guam", 
+        "code": "GU"
+    }
+},
+{
+    "pk": 84, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guatemala", 
+        "code": "GT"
+    }
+},
+{
+    "pk": 85, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guayana francesa", 
+        "code": "GF"
+    }
+},
+{
+    "pk": 86, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guernsey", 
+        "code": "GG"
+    }
+},
+{
+    "pk": 87, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guinea", 
+        "code": "GN"
+    }
+},
+{
+    "pk": 88, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guinea-bisau", 
+        "code": "GW"
+    }
+},
+{
+    "pk": 89, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guinea ecuatorial", 
+        "code": "GQ"
+    }
+},
+{
+    "pk": 90, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Guyana", 
+        "code": "GY"
+    }
+},
+{
+    "pk": 91, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Haiti", 
+        "code": "HT"
+    }
+},
+{
+    "pk": 92, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Honduras", 
+        "code": "HN"
+    }
+},
+{
+    "pk": 93, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Hong kong", 
+        "code": "HK"
+    }
+},
+{
+    "pk": 94, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Hungria", 
+        "code": "HU"
+    }
+},
+{
+    "pk": 95, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "India", 
+        "code": "IN"
+    }
+},
+{
+    "pk": 96, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Indonesia", 
+        "code": "ID"
+    }
+},
+{
+    "pk": 97, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Irak", 
+        "code": "IQ"
+    }
+},
+{
+    "pk": 98, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Iran, republica islamica de", 
+        "code": "IR"
+    }
+},
+{
+    "pk": 99, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Irlanda", 
+        "code": "IE"
+    }
+},
+{
+    "pk": 100, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Isla bouvet", 
+        "code": "BV"
+    }
+},
+{
+    "pk": 101, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Isla de man", 
+        "code": "IM"
+    }
+},
+{
+    "pk": 102, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Isla de navidad", 
+        "code": "CX"
+    }
+},
+{
+    "pk": 103, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Isla norfolk", 
+        "code": "NF"
+    }
+},
+{
+    "pk": 104, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islandia", 
+        "code": "IS"
+    }
+},
+{
+    "pk": 105, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas caiman", 
+        "code": "KY"
+    }
+},
+{
+    "pk": 106, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas cocos (keeling)", 
+        "code": "CC"
+    }
+},
+{
+    "pk": 107, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas cook", 
+        "code": "CK"
+    }
+},
+{
+    "pk": 108, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas feroe", 
+        "code": "FO"
+    }
+},
+{
+    "pk": 109, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas georgias del sur y sandwich del sur", 
+        "code": "GS"
+    }
+},
+{
+    "pk": 110, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas heard y mcdonald", 
+        "code": "HM"
+    }
+},
+{
+    "pk": 111, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas falkland (malvinas)", 
+        "code": "FK"
+    }
+},
+{
+    "pk": 112, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas marianas del norte", 
+        "code": "MP"
+    }
+},
+{
+    "pk": 113, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas marshall", 
+        "code": "MH"
+    }
+},
+{
+    "pk": 114, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Pitcairn", 
+        "code": "PN"
+    }
+},
+{
+    "pk": 115, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas salomon", 
+        "code": "SB"
+    }
+},
+{
+    "pk": 116, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas turcas y caicos", 
+        "code": "TC"
+    }
+},
+{
+    "pk": 117, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas ultramarinas menores de estados unidos", 
+        "code": "UM"
+    }
+},
+{
+    "pk": 118, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas virgenes britanicas", 
+        "code": "VG"
+    }
+},
+{
+    "pk": 119, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Islas virgenes de los estados unidos", 
+        "code": "VI"
+    }
+},
+{
+    "pk": 120, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Israel", 
+        "code": "IL"
+    }
+},
+{
+    "pk": 121, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Italia", 
+        "code": "IT"
+    }
+},
+{
+    "pk": 122, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Jamaica", 
+        "code": "JM"
+    }
+},
+{
+    "pk": 123, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Japon", 
+        "code": "JP"
+    }
+},
+{
+    "pk": 124, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Jersey", 
+        "code": "JE"
+    }
+},
+{
+    "pk": 125, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Jordania", 
+        "code": "JO"
+    }
+},
+{
+    "pk": 126, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Kazajistan", 
+        "code": "KZ"
+    }
+},
+{
+    "pk": 127, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Kenia", 
+        "code": "KE"
+    }
+},
+{
+    "pk": 128, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Kirguistan", 
+        "code": "KG"
+    }
+},
+{
+    "pk": 129, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Kiribati", 
+        "code": "KI"
+    }
+},
+{
+    "pk": 130, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Kuwait", 
+        "code": "KW"
+    }
+},
+{
+    "pk": 131, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Laos !republica democratica popular lao", 
+        "code": "LA"
+    }
+},
+{
+    "pk": 132, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Lesoto", 
+        "code": "LS"
+    }
+},
+{
+    "pk": 133, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Letonia", 
+        "code": "LV"
+    }
+},
+{
+    "pk": 134, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Libano", 
+        "code": "LB"
+    }
+},
+{
+    "pk": 135, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Liberia", 
+        "code": "LR"
+    }
+},
+{
+    "pk": 136, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Libia", 
+        "code": "LY"
+    }
+},
+{
+    "pk": 137, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Liechtenstein", 
+        "code": "LI"
+    }
+},
+{
+    "pk": 138, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Lituania", 
+        "code": "LT"
+    }
+},
+{
+    "pk": 139, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Luxemburgo", 
+        "code": "LU"
+    }
+},
+{
+    "pk": 140, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Macao", 
+        "code": "MO"
+    }
+},
+{
+    "pk": 141, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Madagascar", 
+        "code": "MG"
+    }
+},
+{
+    "pk": 142, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Malasia", 
+        "code": "MY"
+    }
+},
+{
+    "pk": 143, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Malaui", 
+        "code": "MW"
+    }
+},
+{
+    "pk": 144, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Maldivas", 
+        "code": "MV"
+    }
+},
+{
+    "pk": 145, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mali", 
+        "code": "ML"
+    }
+},
+{
+    "pk": 146, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Malta", 
+        "code": "MT"
+    }
+},
+{
+    "pk": 147, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Marruecos", 
+        "code": "MA"
+    }
+},
+{
+    "pk": 148, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Martinica", 
+        "code": "MQ"
+    }
+},
+{
+    "pk": 149, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mauricio", 
+        "code": "MU"
+    }
+},
+{
+    "pk": 150, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mauritania", 
+        "code": "MR"
+    }
+},
+{
+    "pk": 151, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mayotte", 
+        "code": "YT"
+    }
+},
+{
+    "pk": 152, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mexico", 
+        "code": "MX"
+    }
+},
+{
+    "pk": 153, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Micronesia, estados federados de", 
+        "code": "FM"
+    }
+},
+{
+    "pk": 154, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Moldavia, republica de", 
+        "code": "MD"
+    }
+},
+{
+    "pk": 155, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Monaco", 
+        "code": "MC"
+    }
+},
+{
+    "pk": 156, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mongolia", 
+        "code": "MN"
+    }
+},
+{
+    "pk": 157, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Montenegro", 
+        "code": "ME"
+    }
+},
+{
+    "pk": 158, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Montserrat", 
+        "code": "MS"
+    }
+},
+{
+    "pk": 159, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Mozambique", 
+        "code": "MZ"
+    }
+},
+{
+    "pk": 160, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nabimia", 
+        "code": "NA"
+    }
+},
+{
+    "pk": 161, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nauru", 
+        "code": "NR"
+    }
+},
+{
+    "pk": 162, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nepal", 
+        "code": "NP"
+    }
+},
+{
+    "pk": 163, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nicaragua", 
+        "code": "NI"
+    }
+},
+{
+    "pk": 164, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Niger", 
+        "code": "NE"
+    }
+},
+{
+    "pk": 165, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nigeria", 
+        "code": "NG"
+    }
+},
+{
+    "pk": 166, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Niue", 
+        "code": "NU"
+    }
+},
+{
+    "pk": 167, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Noruega", 
+        "code": "NO"
+    }
+},
+{
+    "pk": 168, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nueva caledonia", 
+        "code": "NC"
+    }
+},
+{
+    "pk": 169, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Nueva zelanda", 
+        "code": "NZ"
+    }
+},
+{
+    "pk": 170, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Oman", 
+        "code": "OM"
+    }
+},
+{
+    "pk": 171, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Paises bajos", 
+        "code": "NL"
+    }
+},
+{
+    "pk": 172, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Pakistan", 
+        "code": "PK"
+    }
+},
+{
+    "pk": 173, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Palaos", 
+        "code": "PW"
+    }
+},
+{
+    "pk": 174, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Palestina, estado de", 
+        "code": "PS"
+    }
+},
+{
+    "pk": 175, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Panama", 
+        "code": "PA"
+    }
+},
+{
+    "pk": 176, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Papua nueva guinea", 
+        "code": "PG"
+    }
+},
+{
+    "pk": 177, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Paraguay", 
+        "code": "PY"
+    }
+},
+{
+    "pk": 178, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Polinesia francesa", 
+        "code": "PF"
+    }
+},
+{
+    "pk": 179, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Polonia", 
+        "code": "PL"
+    }
+},
+{
+    "pk": 180, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Portugal", 
+        "code": "PT"
+    }
+},
+{
+    "pk": 181, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Puerto rico", 
+        "code": "PR"
+    }
+},
+{
+    "pk": 182, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Reino unido", 
+        "code": "GB"
+    }
+},
+{
+    "pk": 183, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Republica centroafricana", 
+        "code": "CF"
+    }
+},
+{
+    "pk": 184, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Republica checa", 
+        "code": "CZ"
+    }
+},
+{
+    "pk": 185, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Macedonia, la antigua republica yugoslava de", 
+        "code": "MK"
+    }
+},
+{
+    "pk": 186, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Congo", 
+        "code": "CG"
+    }
+},
+{
+    "pk": 187, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Congo, la republica democratica del", 
+        "code": "CD"
+    }
+},
+{
+    "pk": 188, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Republica dominicana", 
+        "code": "DO"
+    }
+},
+{
+    "pk": 189, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Reunion", 
+        "code": "RE"
+    }
+},
+{
+    "pk": 190, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Ruanda", 
+        "code": "RW"
+    }
+},
+{
+    "pk": 191, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Rumania", 
+        "code": "RO"
+    }
+},
+{
+    "pk": 192, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Rusia !federacion rusa", 
+        "code": "RU"
+    }
+},
+{
+    "pk": 193, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sahara occidental", 
+        "code": "EH"
+    }
+},
+{
+    "pk": 194, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Samoa", 
+        "code": "WS"
+    }
+},
+{
+    "pk": 195, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Samoa americana", 
+        "code": "AS"
+    }
+},
+{
+    "pk": 196, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "San bartolome", 
+        "code": "BL"
+    }
+},
+{
+    "pk": 197, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "San cristobal y nieves", 
+        "code": "KN"
+    }
+},
+{
+    "pk": 198, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "San marino", 
+        "code": "SM"
+    }
+},
+{
+    "pk": 199, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "San martin (parte francesa)", 
+        "code": "MF"
+    }
+},
+{
+    "pk": 200, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "San pedro y miquelon", 
+        "code": "PM"
+    }
+},
+{
+    "pk": 201, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "San vicente y las granadinas", 
+        "code": "VC"
+    }
+},
+{
+    "pk": 202, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Santa helena, ascension y tristan de acu\u00f1a", 
+        "code": "SH"
+    }
+},
+{
+    "pk": 203, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Santa lucia", 
+        "code": "LC"
+    }
+},
+{
+    "pk": 204, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Santo tome y principe", 
+        "code": "ST"
+    }
+},
+{
+    "pk": 205, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Senegal", 
+        "code": "SN"
+    }
+},
+{
+    "pk": 206, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Serbia", 
+        "code": "RS"
+    }
+},
+{
+    "pk": 207, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Seychelles", 
+        "code": "SC"
+    }
+},
+{
+    "pk": 208, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sierra leona", 
+        "code": "SL"
+    }
+},
+{
+    "pk": 209, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Singapur", 
+        "code": "SG"
+    }
+},
+{
+    "pk": 210, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sint maarten (parte neerlandesa)", 
+        "code": "SX"
+    }
+},
+{
+    "pk": 211, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Republica arabe de siria", 
+        "code": "SY"
+    }
+},
+{
+    "pk": 212, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Somalia", 
+        "code": "SO"
+    }
+},
+{
+    "pk": 213, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sri lanka", 
+        "code": "LK"
+    }
+},
+{
+    "pk": 214, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Suazilandia", 
+        "code": "SZ"
+    }
+},
+{
+    "pk": 215, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sudafrica", 
+        "code": "ZA"
+    }
+},
+{
+    "pk": 216, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sudan", 
+        "code": "SD"
+    }
+},
+{
+    "pk": 217, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Sudan del sur", 
+        "code": "SS"
+    }
+},
+{
+    "pk": 218, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Suecia", 
+        "code": "SE"
+    }
+},
+{
+    "pk": 219, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Suiza", 
+        "code": "CH"
+    }
+},
+{
+    "pk": 220, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Surinam", 
+        "code": "SR"
+    }
+},
+{
+    "pk": 221, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Svalbard y jan mayen", 
+        "code": "SJ"
+    }
+},
+{
+    "pk": 222, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tailandia", 
+        "code": "TH"
+    }
+},
+{
+    "pk": 223, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Taiwan, provincia de china", 
+        "code": "TW"
+    }
+},
+{
+    "pk": 224, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tanzania, republica unida de", 
+        "code": "TZ"
+    }
+},
+{
+    "pk": 225, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tayikistan", 
+        "code": "TJ"
+    }
+},
+{
+    "pk": 226, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Territorio britanico del oceano indico", 
+        "code": "IO"
+    }
+},
+{
+    "pk": 227, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Territorios australes franceses", 
+        "code": "TF"
+    }
+},
+{
+    "pk": 228, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Timor-leste", 
+        "code": "TL"
+    }
+},
+{
+    "pk": 229, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Togo", 
+        "code": "TG"
+    }
+},
+{
+    "pk": 230, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tokelau", 
+        "code": "TK"
+    }
+},
+{
+    "pk": 231, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tonga", 
+        "code": "TO"
+    }
+},
+{
+    "pk": 232, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Trinidad y tobago", 
+        "code": "TT"
+    }
+},
+{
+    "pk": 233, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tunez", 
+        "code": "TN"
+    }
+},
+{
+    "pk": 234, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Turkmenistan", 
+        "code": "TM"
+    }
+},
+{
+    "pk": 235, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Turquia", 
+        "code": "TR"
+    }
+},
+{
+    "pk": 236, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Tuvalu", 
+        "code": "TV"
+    }
+},
+{
+    "pk": 237, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Ucrania", 
+        "code": "UA"
+    }
+},
+{
+    "pk": 238, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Uganda", 
+        "code": "UG"
+    }
+},
+{
+    "pk": 239, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Uruguay", 
+        "code": "UY"
+    }
+},
+{
+    "pk": 240, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Uzbekistan", 
+        "code": "UZ"
+    }
+},
+{
+    "pk": 241, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Vanuatu", 
+        "code": "VU"
+    }
+},
+{
+    "pk": 242, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Vaticano !santa sede (ciudad estado vaticavo)", 
+        "code": "VA"
+    }
+},
+{
+    "pk": 243, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Venezuela, republica bolivariana de", 
+        "code": "VE"
+    }
+},
+{
+    "pk": 244, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Viet nam", 
+        "code": "VN"
+    }
+},
+{
+    "pk": 245, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Wallis y futuna", 
+        "code": "WF"
+    }
+},
+{
+    "pk": 246, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Yemen", 
+        "code": "YE"
+    }
+},
+{
+    "pk": 247, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Yibuti", 
+        "code": "DJ"
+    }
+},
+{
+    "pk": 248, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Zambia", 
+        "code": "ZM"
+    }
+},
+{
+    "pk": 249, 
+    "model": "ubigeo.country", 
+    "fields": {
+        "name": "Zimbabue", 
+        "code": "ZW"
+    }
+}
+]

@@ -1,0 +1,157 @@
+{% extends "security/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .z-index-5{
+        z-index: 55555;
+    }
+    .btn-neutral:hover{
+       color: rgb(54, 54, 54) !important; 
+       background-color: beige !important;
+    }
+</style>
+<div id="appRoles">
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Gestión de Roles y Permisos
+                    <small class="text-muted">Roles, Permisos</small>
+                    </h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-round hidden-sm-down float-right m-l-10" type="button" title="Agregar Rol" data-toggle="modal" data-target="#ModalRol" @click="formRole = {}">
+                        <i class="zmdi zmdi-plus"></i>
+                        <span style=" position: relative; top: -2px; left: 3px; font-weight: 500;">Agregar Rol</span>
+                    </button>
+                    <ul class="breadcrumb float-md-right">
+                        <!-- <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li> -->
+                        <li class="breadcrumb-item"> <a href="{% url 'security:home_security' %}"><i class="zmdi zmdi-home"></i> Seguridad</a> </li>
+                        <li class="breadcrumb-item active">Roles y Permisos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- search -->
+            <div class="col-12">
+                <div class="card">                    
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-6" v-for="(detail,index) in role">
+                            <div class="card">
+                                <div class="card-header bg-teal" style="padding-bottom: 0; ">
+                                    <!-- <div class="card-actions" style="position: absolute; right: 10px; top: 50px;">
+                                        <a class="btn btn-round btn-sm bg-teal" data-toggle="collapse" :data-target="'#role' + detail.pk" aria-expanded="false" ><i class="material-icons text-light">keyboard_arrow_down</i></a>
+                                    </div> -->
+                                    
+                                    <h5 class="card-title text-uppercase text-light" >
+                                        <a style="cursor: pointer;" data-toggle="collapse" :data-target="'#role' + detail.pk" aria-expanded="false"><span class="text-capitalize"> <small> Rol: </small></span> [[detail.fields.name]]</a> 
+                                    </h5>
+                                    <a href="#" title="Editar" @click="editRole(detail.fields.name, detail.pk, index)" class="btn btn-icon btn-round bg-teal" data-toggle="modal" data-target="#ModalRol" style = "top: 0; right: 45px; position: absolute;">
+                                        <i class="zmdi zmdi-edit" style="position: relative; top: 8px; color: khaki;"></i>
+                                    </a>
+                                    <a role="button" title="Eliminar" class="btn btn-icon btn-round bg-teal" @click="deleteRole(detail, index)" style = "top: 0; right: 5px; position: absolute;">
+                                        <i class="zmdi zmdi-close" style="color: red; position: relative; top: 8px; "></i>
+                                    </a> 
+                                    <div class="col-12 text-center" style=" margin-top: -15px;">
+                                        <button type="button" class="btn btn-sm btn-simple btn-neutral btn-round" data-toggle="modal" data-target="#ModalPermiso" @click="openModalPermiso(detail.pk, detail.fields.name)">
+                                            <i class="material-icons" style="font-size: 17px; color: rgb(201 213 224) !important; position: relative; top: 2px;">add_circle</i>
+                                            <span style=" position: relative; top: -3px; font-size: 10px;"> Agregar Módulos</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div  :id="'role' + detail.pk" class="card-body  show inbox-panel">
+                                    <ul class="list-group list-group-full mytooltip tooltip-effect-5">
+                                        <li class="list-group-item" v-for="(detail_,index_) in detail.fields.permisos"> 
+                                            <div class="row "> 
+                                                <label  class="col-10 col-form-label" :title="'Menu: ' + detail_.fields.menu">
+                                                    [[detail_.fields.name]] <h6 class="card-subtitle">[[detail_.fields.codename]]</h6> 
+                                                </label>
+                                                <div class="col-2 text-center">
+                                                    <a class='btn btn-sm btn-round btn-danger float-right text-white' @click='deleteRolePermission(detail_,detail,index_,index)'> 
+                                                        <i class="material-icons" style="font-size: 18px;">delete_forever</i>
+                                                    </a>   
+                                                </div> 
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>    
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id='ModalRol' class="modal fade "  role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mySmallModalLabel">Rol</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body"> 
+                    <form class="form-material" @submit.prevent="sendRole"  method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="hidden" id='pk_role' name='pk' v-model="formRole.pk" class="form-control form-control-line" > 
+                            <label>Nombre: </label>
+                            <input type="text" id='name' name='name' v-model="formRole.name" class="form-control form-control-line" required> 
+                                                  
+                        </div>
+                        <button type="submit" class="btn btn-info btn-round waves-effect float-right">
+                            <i class="material-icons">save</i>
+                            <span style="position: relative; top: -7px;">Guardar</span>
+                        </button>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div id='ModalPermiso' class="modal fade"  role="dialog" aria-labelledby="longmodal" aria-hidden="true" >
+        <div class="modal-dialog">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h5 class="modal-title" id="longmodal">Asignar permisos <small>- Rol [[ rol_name ]] -</small> </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <form class="form-material" @submit.prevent="sendRolePermission" method="post">
+                    <div class="modal-body">
+                        <div class="col-md-12" >
+                            <label class="control-label text-left">Módulos:</label>
+                            <select id='access' name='access' v-model="formAccess.access" class="form-control show-tick z-index" data-live-search = 'true' >
+                                <option value=''>Seleccionar</option>
+                                <option v-for="acc in access" :value="acc.pk">[[ acc.fields.name]] | [[ acc.fields.codename]] </option>
+
+                            </select>                         
+                          
+                        </div>
+                        <div class="col-md-12 m-t-5">
+                            <!-- <label class="control-label text-left">Roles</label>
+                            <select  v-select2="''" id='roles' name='roles' v-model="formAccess.roles"  class="m-b-10 form-control select2-multiple" style="width: 100%" multiple="multiple" data-placeholder="Rol">
+                                <option v-for="rol in role" :value="rol.pk">[[ rol.fields.name ]]</option>
+                            </select> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success active btn-sm waves-effect text-left">
+                            <i class="material-icons">save</i>
+                            <span style="position: relative; top: -7px;">Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/vue/roles-vue.js' %}"></script>
+{% endblock scripts %}
+
+

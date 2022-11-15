@@ -1,0 +1,336 @@
+{% extends "security/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .z-index-5{
+        z-index: 55555;
+    }
+    .btn_go_roles{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 105px;
+        height: 43px;
+        z-index: 12;
+        padding-top: 5px;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0 0 6px rgba(0,0,0,0.16), 0 6px 12px rgba(0,0,0,0.32);
+    }
+    .btn_go_roles:hover{
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.16), 0 6px 12px rgba(255, 255, 255, 0.32);;
+        border-radius: 20px;
+    }
+    .tree-menu {
+    line-height: 1em;
+    }
+
+    .tree-menu,
+    .tree-menu ol {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    }
+
+    .tree-menu > li {
+    margin-bottom: 0.5em;
+    }
+
+    .tree-menu ol {
+    position: relative;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    }
+    .tree-menu ol:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    border-left: 2px solid darkgrey;
+    }
+
+    .tree-menu ol li {
+    position: relative;
+    margin: 0;
+    padding: 0 1em;
+    }
+
+    .tree-menu ol li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1em;
+    left: 0;
+    width: 0.5em;
+    height: 0;
+    border-top: 2px solid darkgrey;
+    }
+
+    .tree-menu ol li:last-child:before {
+    top: 1.1em;
+    bottom: 0;
+    height: auto;
+    background-color: rgb(33 76 112);
+    }
+</style>
+<div id="appModules">
+    <section class="content home">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h2>Gestión de Módulos
+                    <small class="text-muted">Módulos y Menús</small>
+                    </h2>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-round hidden-sm-down float-right m-l-10" type="button" title="Agregar Módulo" @click="changeStateC" data-toggle="modal" data-target="#ModalModule" >
+                        <i class="zmdi zmdi-plus"></i>
+                        <span style=" position: relative; top: -2px; left: 3px; font-weight: 500;">Agregar módulo</span>
+                    </button>
+                    <ul class="breadcrumb float-md-right">
+                        <!-- <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li> -->
+                        <li class="breadcrumb-item"> <a href="{% url 'security:home_security' %}"><i class="zmdi zmdi-home"></i> Seguridad</a> </li>
+                        <li class="breadcrumb-item active">Módulos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- search -->
+            <div class="col-12">
+                <div class="card">                    
+                    <div class="row clearfix">
+                        <div class="col-lg-4 col-md-6" v-for="(detail,index) in access">
+                            <div class="card">
+                                <div class="card-header bg-teal" style="padding-bottom: 0;min-height: 125px;">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="/static/img/in_pc.png" class="img-responsive" alt="profile-image">
+                                        </div>
+                                        <div class="col-8" style="align-self: center;">
+                                            <h5 class="card-title text-uppercase text-light" >[[detail.fields.name]] 
+                                            </h5>
+                                            <p>Ruta: [[detail.fields.codename]]  </p>
+                                            
+                                        </div>
+                                        <a href="#" title="Editar" @click="editModule(detail.fields, detail.pk, index)" class="btn btn-icon btn-round btn-neutral" data-toggle="modal" data-target="#ModalModule" style=" position: absolute; right: 55px; bottom: 7px;">
+                                            <i class="zmdi zmdi-edit" style="position: relative; top: 8px; color: rgb(231, 214, 62);"></i>
+                                        </a>
+                                        <a role="button" title="Eliminar" class="btn btn-icon btn-round btn-neutral" @click="deleteModule(detail, index)" style=" position: absolute; right: 10px; bottom: 7px;">
+                                            <i class="zmdi zmdi-close" style="color: red; position: relative; top: 8px; "></i>
+                                        </a> 
+                                        <a href="#" title="Menús" @click="gestionMenu(detail.fields, detail.pk)" class="btn btn-icon btn-simple btn-neutral" data-toggle="modal" data-target="#ModalMenu" style=" position: absolute; right: 10px; top: 7px;">
+                                            <i class="material-icons" style="position: relative; top: 8px;">playlist_add_check</i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id='ModalModule' class="modal fade" role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 v-if="state_form == 'create'" class="modal-title" id="longmodal">Agregar Módulo </h5>
+                    <h5 v-if="state_form == 'edit'" class="modal-title" id="longmodal">Editar Módulo </h5>
+                    <!-- <button class="btn  btn-outline-info btn-sm waves-effect waves-light m-l-40" type="button" ><span class="btn-label"><i class="fa fa-bars"></i></span> Listar</button> -->
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <form class="form-material " @submit.prevent="sendModule" method="post">
+                    {% csrf_token %}
+                    <div class="modal-body row">
+                        <div class="col-md-12">
+                            <input type="hidden" id='pk' name='pk' v-model="formPerm.pk" class="form-control form-control-line" > 
+
+                            <label class="control-label text-left">Aplicación:</label>
+                            <select id='app' name='app'v-model="formPerm.app" class="form-control show-tick z-index-5" data-live-search = 'true' >
+                                <option value=''>Seleccionar</option>
+                                {% for app in app  %}
+                                    <option value="{{app.pk}}">{{ app.app_label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label text-left">Ruta: </label>
+                                <input type="text" id='acl' name='acl'v-model="formPerm.acl" class="form-control form-control-line" > 
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label text-left">Nombre: </label>
+                                <input type="text" id='name_module' name='name_module'v-model="formPerm.name_module" class="form-control form-control-line" > 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-danger  btn-sm waves-effect text-left">
+                            <b> X </b> 
+                            <span>Cerrar</span>
+                            
+                        </button>
+                        <button v-if="state_form == 'create'" type="submit" class="btn btn-success active btn-sm waves-effect text-left">
+                            <i class="material-icons">save</i>
+                            <span style="position: relative; top: -7px;">Guardar</span>
+                        </button>
+                        <button v-if="state_form == 'edit'" type="submit" class="btn btn-success active btn-sm waves-effect text-left">
+                            <i class="material-icons">save</i>
+                            <span style="position: relative; top: -7px;">Actualizar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+    <div id='ModalMenu' class="modal fade" role="dialog" aria-labelledby="mySmallModalLabel" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="longmodal">Gestión de Menús </h5>
+                    <!-- <button class="btn  btn-outline-info btn-sm waves-effect waves-light m-l-40" type="button" ><span class="btn-label"><i class="fa fa-bars"></i></span> Listar</button> -->
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 body" style="background-color: rgb(33 76 112);">
+                            <ul class="tree-menu mt-4 text-light" id="ordermenu">
+                                <li class="dd"><b><span class="text-uppercase">[[name_menu]]</span></b> 
+                                    <ol class="dd-list">                        
+                                        <li class="dd-item" v-for="sb,index in submenu" v-bind:data-id="[[sb.pk]]">
+                                            <div class="dd-handle">
+                                                [[ sb.submenus.fields.name ]]
+                                                <a href="#" title="Editar" @click="editMenu(sb, index)" class="dd-nodrag btn btn-icon btn-round btn-neutral" style=" position: absolute; right: 40px; bottom: 7px; top: -10px; background: transparent;">
+                                                    <i class="zmdi zmdi-edit" style="position: relative; top: 8px; color: rgb(231, 214, 62);"></i>
+                                                </a>
+                                                <a role="button" title="Eliminar" class="dd-nodrag btn btn-icon btn-round btn-neutral" @click="deleteMenu(sb, index)" style=" position: absolute; right: 10px; bottom: 7px;top: -10px; background: transparent;">
+                                                    <i class="zmdi zmdi-close" style="color: red; position: relative; top: 8px; "></i>
+                                                </a> 
+                                            </div>
+                                        
+                                        </li>
+
+                                    </ol>
+                                </li>                       
+                            </ul>
+                            <form method="POST" id="form_new" @submit.prevent="sendOrderSubMenus()">
+                                {% csrf_token %}
+                                <textarea style="display: none" name="order_menu" cols="30" rows="3" class="form-control no-resize" readonly="">[{"pk":1},{"pk":2}]</textarea>
+                                <button style="display: none" type="submit" id="btn-order" class="btn btn-block btn-primary">Guardar</button>
+                            </form>
+
+                        </div>
+                        <div class="col-6">
+                            <form class="form-material " @submit.prevent="sendSubMenu" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="card-body">
+                                        <h6 v-if="state_formmenu == 'create'">Nuevo Menú</h6>
+                                        <small v-if="state_formmenu == 'create'" class="text-muted">Para Módulo [[name_menu]]</small>
+                                        <h6 v-if="state_formmenu == 'edit'">Editar menú</h6>
+                                        <small v-if="state_formmenu == 'edit'" class="text-muted">[[formMenu.submenu]] de [[name_menu]]</small>
+
+                                    </div>
+                                    <div class="col-md-12" style="display: none;">
+                                        <input type="hidden" id='pk' name='pk' v-model="formMenu.pk" class="form-control form-control-line" > 
+            
+                                        <label class="control-label text-left">Aplicación:</label>
+                                        <select id='appsb' name='app'v-model="formMenu.app" class="form-control show-tick z-index-5" data-live-search = 'true' >
+                                            <option value=''>Seleccionar</option>
+                                            {% for app in app  %}
+                                                <option value="{{app.pk}}">{{ app.app_label }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                   
+                                    <div class="col-md-6" style="display: none;">
+                                        <label class="control-label text-left">Menú principal:</label>
+                                        <select id='menusb' name='menu'v-model="formMenu.menu" class="form-control show-tick z-index" data-live-search = 'true' >
+                                            <option value=''>Seleccionar</option>
+                                            <option v-for="menu in menu" :value="menu.pk">[[ menu.fields.name]] </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label text-left">Nombre: </label>
+                                            <input type="text" id='submenusb' name='submenu'v-model="formMenu.submenu" class="form-control form-control-line" > 
+                                        </div>
+                                    </div>
+            
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label text-left">Ruta: </label>
+                                            <input type="text" id='aclsb' name='acl'v-model="formMenu.acl" class="form-control form-control-line" > 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label text-left">Orden: </label>
+                                            <input type="text" pattern="[0-9]" id='ordensub'  name='ordensub' v-model="formMenu.ordensub" class="form-control form-control-line" > 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button v-if="state_formmenu == 'edit'" type="button" @click="createMenu" class="btn btn-sm">
+                                        <b> X </b> 
+                                        <span style="font-size: smaller">Cancelar</span>
+                                        
+                                    </button>
+                                    <button v-if="state_formmenu == 'create'" id="btn-save" type="submit" class="btn btn-success active btn-sm waves-effect text-left">
+                                        <i class="material-icons">save</i>
+                                        <span style="position: relative; top: -7px; ">Guardar</span>
+                                    </button>
+                                    <button v-if="state_formmenu == 'edit'" type="submit" class="btn btn-success active btn-sm">
+                                        <i class="material-icons" style="font-size: 17px;">save</i>
+                                        <span style="font-size: smaller">Actualizar</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div>
+        </div>
+    </div>  
+    <!-- <a class="btn_go_roles btn-simple" href="{% url 'security:roles' %}" title="Ir a Gestión de Roles">
+        <i class="material-icons" style="position: relative; left: -8px; top: 3px;">trending_up</i>
+         <span style="font-size: 10px; position: absolute; left: 43px;">&nbsp;GESTIÓN DE ROLES</span>
+    </a> -->
+
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'plugin/sortable-nestable/jquery.nestable.js' %}"></script> <!-- Jquery Nestable -->
+<script src="{% static 'plugin/sortable-nestable/sortable-nestable-acl.js' %}"></script> 
+    <script src="{% static 'js/vue/modules-vue.js' %}"></script>
+    <script>
+    $(document).ready(function(){
+        $('#ordensub').val('1')
+
+        $('#btn-save').click(function(){
+            $('#ordensub').val('1');
+        });
+
+      });
+    </script>
+{% endblock scripts %}
+
+

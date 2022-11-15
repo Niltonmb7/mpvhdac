@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+
+</style>
+<div id="app_person">
+    <section class="content">
+        <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Gestión de usuarios
+                <small class="text-muted">Validados por Reniec</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Usuarios</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- search -->
+        <div class="row clearfix pullUp" >
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>PERSONA</strong> <small>Busque a la persona por su DNI</small> </h2>
+                
+                        <form id="search_person" v-on:submit.prevent="seachperson">
+                            <div class="input-group">
+                                <input pattern="[0-9]{8}" name="id_person" type="text" class="form-control" v-model="keyuser" title="Ingrese un DNI, debe contener 8 digitos" placeholder="Digite documento de identidad...">
+                                <span class="input-group-addon"><i class="zmdi zmdi-search"></i></span>
+                            </div>
+                             <button  type="submit" hidden>GUARDAR</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+

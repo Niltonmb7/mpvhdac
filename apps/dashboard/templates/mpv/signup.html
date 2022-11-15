@@ -1,0 +1,366 @@
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>{% block title %}MESA DE PARTES VIRTUAL - HRDAC{% endblock title %}</title>
+    <link rel="icon" href='/static/img/favicon.png' type="image/x-icon">
+
+    <!-- Custom Css -->
+    {% load static %}
+
+    <style>
+        .page-header-image{
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+        }
+        .checkbox label::after{
+            color: #eee !important;
+        }
+        .authentication .card-plain .logo-container{
+            width: 280px !important;
+        }
+    </style>
+    {% block styles %}
+    {% endblock styles %}
+  
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color_skins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/toastr.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sweetalert.css' %}">
+</head>
+
+<body class="theme-cyan authentication sidebar-collapse">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent">
+    <div class="container">        
+        <div class="navbar-translate n_logo">
+            <a class="navbar-brand" href="#" title="" target="_blank" style="color: white !important">HOSPITAL REGIONAL DANIEL ALCIDES CARRIÓN GARCÍA - PASCO</a>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" title="Ver Manual de Usuario" href="https://drive.google.com/file/d/1xLT720Jwj1TL2_x-DYLJ3-qgj32GptEW/view?usp=sharing" target="_blank">
+                        <i class="zmdi zmdi-book"></i>
+                        Manual de Usuario
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" title="Ver Videotutorial" href="https://youtu.be/ozI2Vg0GJUw" target="_blank">
+                        <i class="zmdi zmdi-youtube"></i>
+                        Videotutorial
+                    </a>
+                </li>  
+                <li class="nav-item">
+                    <a class="nav-link" title="Like us on Facebook" href="https://www.facebook.com/hospitalcarrionpasco/" target="_blank">
+                        <i class="zmdi zmdi-facebook"></i>
+                        <p class="d-lg-none d-xl-none">Facebook</p>
+                    </a>
+                </li>     
+                <li class="nav-item">
+                    <a class="nav-link bg-default btn btn-round" href="/">Ingresar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+<div class="page-header">
+    <div class="page-header-image" style="background-image:url({% static 'img/login_mpv.jpg' %})"></div>
+    <div class="container">
+        <div class="col-md-12 content-center">
+            <div class="card-plain">
+                <form id='formuser' class="form" method="POST">
+                    <div class="header">
+                        <div class="logo-container">
+                            <img src="{% static 'img/logo_mpv.png' %}" alt="">
+                        </div>
+                        Registra una cuenta
+                    </div>
+                    {% csrf_token %}
+                    <input type="hidden" id='birthday' name='birthday' class="form-control" >
+                    <input type="hidden" id='sex' name='sex' class="form-control" >
+                    <input type="hidden" id='civil' name='civil' class="form-control" >
+                    <input type="hidden" id='group' name='group' value='8' class="form-control" >
+                    <div class="content">
+                        <div class="input-group">
+                            <input type="text" id='username' name='username' maxlength="8" class="form-control" placeholder="DNI">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-assignment"></i>
+                            </span>
+                        </div>                                                
+                        <div class="input-group">
+                            <input type="text" id='last_name0' name='last_name0' class="form-control" placeholder="Apellido Paterno" readonly style="background-color: #2b0e0e00;">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-account-circle"></i>
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id='last_name1' name='last_name1' class="form-control" placeholder="Apellido Materno" readonly style="background-color: #2b0e0e00;">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-account-circle"></i>
+                            </span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id='first_name' name='first_name' class="form-control" placeholder="Nombres" readonly style="background-color: #2b0e0e00;">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-account-circle"></i>
+                            </span>
+                        </div>
+                        <div class="input-group">
+                                <input type="text" id='cellphone' name='cellphone' maxlength="9" class="form-control onlynumber"  placeholder="Celular">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-phone-in-talk"></i>
+                                </span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id='mail' name='mail' class="form-control" placeholder="Correo electrónico">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-email"></i>
+                            </span>
+                        </div>                 
+                        <div class="checkbox" id='group_check' style="color: #eee">
+                            <input id="confirm" type="checkbox">
+                            <label for="confirm">
+                                Validar identidad <p style='font-size: 10px;'>*se enviará un código de validación al correo electrónico.</p></a>
+                            </label>
+                        </div>
+                        <div class="input-group" id='group_validate' hidden>
+                            <input type="text" id='validate'  placeholder="Código de validación" class="form-control">
+                            <span class="input-group-addon">
+                                <i class="zmdi zmdi-lock"></i>
+                            </span>
+                        </div>                        
+                        <div id='group_password' hidden>
+                            <div class="input-group">
+                                <input type="password" id='new_pass_r' name='new_pass_r' placeholder="Password" class="form-control">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-lock"></i>
+                                </span>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" id='new_pass'  name='new_pass' placeholder="Confirm Password" class="form-control">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-lock"></i>
+                                </span>
+                            </div> 
+                        </div>
+                        <button id='btn_registration' class="btn btn-info btn-round btn-lg btn-block waves-effect waves-light" type="submit" disabled>Registrarse</button>
+                        <h5 class=""><a href="/" class="link">¿Ya tienes una cuenta? </a></h5>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>,
+                <span>HRDAC-PASCO</span>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- Jquery Core Js -->
+<script src="{% static 'plugin/libscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/vendorscripts.bundle.js' %}"></script>
+
+<script src="{% static 'plugin/bootstrap-notify.js' %}"></script>
+<script src="{% static 'plugin/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/notifications.js' %}"></script>
+
+<script src="{% static 'plugin/toastr.js' %}"></script>
+<script src="{% static 'plugin/sweetalert.min.js' %}" ></script>
+
+<script>
+    $(".navbar-toggler").on('click',function() {
+        $("html").toggleClass("nav-open");
+    });
+    //=============================================================================
+    $('.form-control').on("focus", function() {
+        $(this).parent('.input-group').addClass("input-group-focus");
+    }).on("blur", function() {
+        $(this).parent(".input-group").removeClass("input-group-focus");
+    });
+</script>
+
+<script>
+$(function(){
+    $('#username').keyup(function(e){
+        var length_doc = $('#username').val().length;
+
+        if(length_doc == 8){
+            var username = $('#username').val();
+            var tkn = $('input[name=csrfmiddlewaretoken]').val();
+            $.ajax({
+                url:'{% url "dashboard:reniec" %}',
+                //enviando para verificación del rol paciente(2)
+                data:{'username':username,'group':'8','csrfmiddlewaretoken':tkn},
+                type: 'POST',
+                success:function(data){
+                    if(data){
+                        if (data.status == false){
+                            $('#username').val('');
+                            toastr.warning('El Usuario ya existe.', null, { "closeButton": false });
+                        }
+                        else{
+                            if (data.error == true){
+                                toastr.error('Error de conexión con Reniec.', null, { "closeButton": false });
+                            }
+                            if(data.data){
+                                var data = data.data 
+                                 if(Object.keys(data).length != 0){
+                                    $('#last_name0').val(data.first_name);
+                                    $('#last_name1').val(data.last_name);
+                                    $('#first_name').val(data.name);
+                                    $('#birthday').val('1980-01-01');
+                                    $('#sex').val('F');
+                                    $('#civil').val('S');
+                                }
+                                else{
+                                    toastr.error('El número de DNI ingresado es incorrecto.', null, { "closeButton": false });
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        else{
+            $('#last_name0').val('');
+            $('#last_name1').val('');
+            $('#first_name').val('');
+            $('#birthday').val('');
+            $('#sex').val('');
+            $('#civil').val('');
+            $('#mail').val('');
+            $('#cellphone').val('');
+            $('#validate').val('');
+            $('#new_pass_r').val('');
+            $('#new_pass').val('');
+
+            $('#group_check').removeAttr('hidden',true);
+            $('#confirm').prop('checked', false);
+            $("#group_password").attr("hidden",true);
+
+            $("#btn_registration").prop('disabled', true); 
+        }
+    });
+
+    $('.onlynumber').keyup(function (){
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
+    
+    var message = [];
+    $('#confirm').change(function() {
+        if(this.checked) {
+            if ($('#username').val() && $('#last_name0').val() && $('#last_name1').val() && $('#first_name').val() && $('#cellphone').val() && $('#mail').val()  ){
+                if($('#cellphone').val().length==9){
+                    if($("#mail").val().indexOf('@', 0) == -1 || $("#mail").val().indexOf('.', 0) == -1) {
+                        toastr.warning('El correo electrónico introducido no es correcto.', null, { "closeButton": false });
+                        $('#confirm').prop('checked', false);
+                    }
+                    else{
+                        var cellphone = $('#cellphone').val();
+                        var mail = $('#mail').val();
+                        var name = $('#first_name').val();
+                        var tkn = $('input[name=csrfmiddlewaretoken]').val();
+
+                        $.ajax({
+                            url:'{% url "dashboard:validation" %}',
+                            data:{'mail': mail, 'cellphone': cellphone, 'name': name, 'csrfmiddlewaretoken': tkn},
+                            type: 'POST',
+                            success:function(data){
+                                message = data.split('@');
+                                
+                                $('#group_validate').removeAttr('hidden',true);
+                                toastr.success('El código de verificación fue enviado a ' + mail, null, { "closeButton": false });
+                                toastr.success('El código de verificación fue enviado al número ' + cellphone, null, { "closeButton": false });
+                            }
+                        });
+                    }               
+                }
+                else{
+                    $('#confirm').prop('checked', false);
+                    toastr.warning('El número de celular introducido no es correcto.', null, { "closeButton": false });
+                }
+            }
+            else{
+                $('#confirm').prop('checked', false);
+                toastr.warning('Ingrese toda la información solicitada.', null, { "closeButton": false });
+            }
+        }
+        else{
+            $("#group_validate").attr("hidden",true);
+        }
+    });
+
+    $('#validate').keyup(function(){
+        var uotp = $(this).val();
+
+        if(uotp.length == 5) {
+            if(message[2] == uotp){
+                $('#group_password').removeAttr('hidden',true);
+                $("#group_validate").attr("hidden",true);
+                $("#group_check").attr("hidden",true);
+                toastr.success('Código validado.', null, { "closeButton": false });
+            }
+            else{
+                toastr.info('Código incorrecto.', null, { "closeButton": false });                
+            }
+        }
+    });
+
+    $('#new_pass_r, #new_pass').keyup(function(){
+        var pass = $('#new_pass').val();
+        var cpass = $('#new_pass_r').val();
+
+        if(pass == cpass){
+            $('#new_pass').css({'border-top':'1px solid #9da1a5', 'border-left':'1px solid #9da1a5','border-bottom':'1px solid #9da1a5'});
+            $('#new_pass_r').css({'border-top':'1px solid #9da1a5', 'border-left':'1px solid #9da1a5','border-bottom':'1px solid #9da1a5'});
+            $('#btn_registration').prop('disabled', false);
+        }
+        else{
+            $('#new_pass').css({'border-top':'1px solid #dc3545', 'border-left':'1px solid #dc3545','border-bottom':'1px solid #dc3545'});
+            $('#new_pass_r').css({'border-top':'1px solid #dc3545', 'border-left':'1px solid #dc3545','border-bottom':'1px solid #dc3545'});
+            $("#btn_registration").prop('disabled', true);
+        }
+    });
+
+    $('#btn_registration').click(function(e){
+        var pass1 = $('#new_pass').val();
+        var pass2 = $('#new_pass_r').val();
+        var username = $('#username').val();
+        var last_name0 = $('#last_name0').val();
+        var last_name1 = $('#last_name1').val();
+        var first_name = $('#first_name').val();
+        var mail = $('#mail').val();
+        var cellphone = $('#cellphone').val();
+        
+        if(pass1 == pass2 && username && last_name0 && last_name1 && first_name && mail && cellphone){
+            $('#formuser').submit();
+        }
+        else{
+            toastr.info('Datos incompletos.', null, { "closeButton": false });
+            return false           
+        }
+    })
+});
+</script>
+</body>
+</html>

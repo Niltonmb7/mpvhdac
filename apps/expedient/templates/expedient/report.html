@@ -1,0 +1,379 @@
+{% extends "mpv/base.html" %} 
+{% load static %} 
+
+{% block content %}
+<div id='reportExpedient'>
+    <section class='content'>
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Reporte de Expedientes
+                    <small class="text-muted">MESA DE PARTES VIRTUAL</small>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="card action_bar">
+                <div class="body">
+                    <div class="row clearfix">
+                        <form method="post">{% csrf_token %}</form>  
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <label for="date_begin">Desde</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-calendar"></i>
+                                </span>
+                                <input type="text" id="date_begin" class="form-control dataspicker">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2">
+                            <label for="date_end">Hasta</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="zmdi zmdi-calendar"></i>
+                                </span>
+                                <input type="text" id="date_end" class="form-control dataspicker">
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-2" style='padding-top: 24px;'>
+                            {% comment %} <button type="button" class="btn btn-default btn-icon btn-simple btn-icon-mini btn-round hidden-sm-down">
+                                <i class="zmdi zmdi-archive"></i>
+                            </button> {% endcomment %}
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+
+            <div class="card widget_2">
+                <ul class="row clearfix list-unstyled m-b-0">
+                    <li class="col-lg-4 col-md-8 col-sm-12">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h5 class="m-t-0">Enviado a Mesa de Partes</h5>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <h2 class="">[[ data_state_emp.cant ]]</h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="progress m-t-20">
+                                    <div class="progress-bar l-amber" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-lg-4 col-md-8 col-sm-12">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h5 class="m-t-0">Observados</h5>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <h2 class="">[[ data_state_obs.cant ]]</h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="progress m-t-20">
+                                    <div class="progress-bar l-blue" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-lg-4 col-md-8 col-sm-12">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h5 class="m-t-0">Registrados en SGD</h5>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <h2 class="">[[ data_state_sgd.cant ]]</h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="progress m-t-20">
+                                    <div class="progress-bar l-parpl" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Tipo Documento</strong> (Registrados en SGD)</h2>
+                        </div>
+                        <div class="body">
+                            <div id="donut_chart" class="dashboard-donut-chart text-center"></div>
+                            <table class="table m-t-15 m-b-0">
+                                <tbody>
+                                    <tr v-for='(typ, index) in data_type_document'>                      
+                                        <td>[[ typ.type_document ]]</td>
+                                        <td>[[ typ.cant ]]</td>
+                                        <td>
+                                            <i class="material-icons" :style='{ color: colors[index] }'>check_circle</i>
+                                        </td>
+                                    </tr>                             
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Tipo Persona</strong> (Registrados en SGD)</h2>
+                        </div>
+                        <div class="body">
+                            <div id="donut_chart_person" class="dashboard-donut-chart text-center"></div>
+                            <table class="table m-t-15 m-b-0">
+                                <tbody>
+                                    <tr v-for='(typ, index) in data_type_person'>                      
+                                        <td>[[ typ.type_person ]]</td>
+                                        <td>[[ typ.cant ]]</td>
+                                        <td>
+                                            <i class="material-icons" :style='{ color: colors[index] }'>check_circle</i>
+                                        </td>
+                                    </tr>                             
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-8">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Cantidad</strong> Mensual</h2>
+                        </div>
+                        <div class="body">
+                            <canvas id="line_chart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </section>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+<script>
+    const rep = new Vue({
+        delimiters: ['[[',']]'],
+        el: '#reportExpedient',
+        data: {
+            date_begin: moment().startOf('month').format('YYYY-MM-DD'),
+            date_end: moment().endOf('month').format('YYYY-MM-DD'),
+            colors: ['#93e3ff', '#b0dd91', '#ffe699', '#f8cbad', '#a4a4a4', '#F4FAFB', '#D6F7F0', '#F9F1D6'],
+            data_state_emp: [],
+            data_state_obs: [],
+            data_state_sgd: [],
+            data_type_document: [],
+            data_type_document_graph: [],
+            data_type_person: [],
+            data_type_person_graph: [],
+            long_emp: [],
+            long_obs: [],
+            long_sgd: [],
+        },
+
+        mounted: function () {
+            this.getDatos();
+        },
+
+        methods: {
+            callMorris() {
+                $('#donut_chart').html('');
+                $('#donut_chart_person').html('');
+                Morris.Donut({
+                    element: 'donut_chart',
+                    data: this.data_type_document_graph,
+                    colors: this.colors,
+                    formatter: function(y) {
+                        return y + '%'
+                    }
+                });
+
+                Morris.Donut({
+                    element: 'donut_chart_person',
+                    data: this.data_type_person_graph,
+                    colors: this.colors,
+                    formatter: function(y) {
+                        return y + '%'
+                    }
+                });
+            },
+
+            callChart() {
+                new Chart(document.getElementById("line_chart").getContext("2d"), this.getConfigChartJs());
+            },
+
+            getConfigChartJs() {
+                var config = null;
+
+                config = {
+                    type: 'line',
+                    data: {
+                        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
+                        datasets: [{
+                            label: "Enviados a Mesa de Partes",
+                            data: this.long_emp,
+                            borderColor: 'rgba(247, 207, 104, 0.2)',
+                            backgroundColor: 'rgba(247, 207, 104, 0.2)',
+                            pointBorderColor: 'rgba(247, 207, 104, 0.5)',
+                            pointBackgroundColor: 'rgba(247, 207, 104, 0.2)',
+                            pointBorderWidth: 1
+                        }, {
+                            label: "Observados",
+                            data: this.long_obs,
+                            borderColor: 'rgba(134, 240, 255, 0.2)',
+                            backgroundColor: 'rgba(134, 240, 255, 0.4)',
+                            pointBorderColor: 'rgba(134, 240, 255, 0)',
+                            pointBackgroundColor: 'rgba(134, 240, 255, 0.9)',
+                            pointBorderWidth: 1
+                        }, {
+                            label: "Registrado en SGD",
+                            data: this.long_sgd,
+                            borderColor: 'rgba(168, 144, 211, 0.2)',
+                            backgroundColor: 'rgba(168, 144, 211, 0.4)',
+                            pointBorderColor: 'rgba(168, 144, 211, 0)',
+                            pointBackgroundColor: 'rgba(168, 144, 211, 0.9)',
+                            pointBorderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        legend: false,
+                        
+                    }
+                }
+                
+                return config;
+            },
+
+            getDatos() {
+                var csrf = $("[name=csrfmiddlewaretoken]").val();
+                $(".page-loader-wrapper").css({"display": "block", "background": "#acadce40"});
+                var frmData = new FormData();
+                frmData.append('date_begin', this.date_begin);
+                frmData.append('date_end', this.date_end);
+                
+                axios({ 
+                    headers: {'X-CSRFToken': csrf, 'Content-Type': 'multipart/form-data'},
+                    method: 'POST',
+                    url: 'datos/',
+                    data: frmData
+                }).then((response) => {
+                    if (response.status == 200) {
+                        if (response.data){ 
+                            this.data_state_emp= [];
+                            this.data_state_obs= [];
+                            this.data_state_sgd= [];
+
+                            for (i=0; i < response.data.data_state.length; i ++){
+                                if (response.data.data_state[i]['state'] == 'EMP') {
+                                    this.data_state_emp = response.data.data_state[i];
+                                }else{
+                                    if (response.data.data_state[i]['state'] == 'OBS') {
+                                        this.data_state_obs = response.data.data_state[i];
+                                    }else{
+                                        if (response.data.data_state[i]['state'] == 'SGD') {
+                                            this.data_state_sgd = response.data.data_state[i];
+                                        }
+                                    }
+                                }
+                            }
+
+                            this.data_type_document = response.data.data_type_document;
+                            this.data_type_document_graph = [];
+                            var graph_tmp = [];
+                            for (i=0; i < response.data.data_type_document.length; i ++){
+                                var tmp_ = { label: response.data.data_type_document[i]['type_document'], value: response.data.data_type_document[i]['percent'] }
+                                graph_tmp.push(tmp_);
+                            }
+                            this.data_type_document_graph = graph_tmp;
+
+                            this.data_type_person = response.data.data_type_person;
+                            this.data_type_person_graph = [];
+                            var graph_per_tmp = [];
+                            for (i=0; i < response.data.data_type_person.length; i ++){
+                                var tmp_ = { label: response.data.data_type_person[i]['type_person'], value: response.data.data_type_person[i]['percent'] }
+                                graph_per_tmp.push(tmp_);
+                            }
+                            this.data_type_person_graph = graph_per_tmp;
+                            this.callMorris();
+
+                            var tmp_emp = [];
+                            for (i=0; i < response.data.data_long_emp.length; i ++){
+                                tmp_emp.push(response.data.data_long_emp[i]['total']);
+                            }
+                            this.long_emp = tmp_emp;
+
+                            var tmp_obs = [];
+                            for (i=0; i < response.data.data_long_obs.length; i ++){
+                                tmp_obs.push(response.data.data_long_obs[i]['total']);
+                            }
+                            this.long_obs = tmp_obs;
+
+                            var tmp_sgd = [];
+                            for (i=0; i < response.data.data_long_sgd.length; i ++){
+                                tmp_sgd.push(response.data.data_long_sgd[i]['total']);
+                            }
+                            this.long_sgd = tmp_sgd;
+
+                            this.callChart();
+                        }
+                    }
+                    $(".page-loader-wrapper").css("display", "none");
+                    $(".page-loader-wrapper").stop();
+                }).catch(er => {
+                    console.log(er)
+                    swal("Información!", er);
+                });
+            },
+        }
+    });
+
+</script>
+
+<script>
+    $(window).on('scroll',function() {
+        $('.card').each(function() {
+            var imagePos = $(this).offset().top;
+
+            var topOfWindow = $(window).scrollTop();
+            if (imagePos < topOfWindow + 400) {
+                $(this).addClass("pullUp");
+            }
+        });
+    });
+
+    $(document).ready(function(){
+        const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+        const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
+        $('#date_begin').val(startOfMonth);
+        $('#date_end').val(endOfMonth);
+
+        $('.dataspicker').bootstrapMaterialDatePicker({
+            format: 'YYYY-MM-DD',
+            clearButton: true,
+            weekStart: 1,
+            time: false,
+            clearText: 'Limpiar',
+            cancelText: 'Cancelar'
+        });
+
+        $('#date_begin, #date_end').change(function() {
+            rep.date_begin = $('#date_begin').val();
+            rep.date_end = $('#date_end').val();
+            rep.getDatos();
+        })
+    });
+</script>
+{% endblock scripts %}

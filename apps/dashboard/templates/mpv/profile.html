@@ -1,0 +1,399 @@
+<!doctype html>
+<html class="no-js " lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+
+<title>{% block title %}MESA DE PARTES VIRTUAL - HRDAC{% endblock title %}</title>
+<link rel="icon" href='/static/img/favicon.png' type="image/x-icon">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-material-datetimepicker.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}">
+<link rel="stylesheet" href="{% static 'css/morris.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/inbox.css' %}">
+<link rel="stylesheet" href="{% static 'plugin/footable/css/footable.core.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/hm-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/color_skins.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/toastr.css' %}">
+<link rel="stylesheet" href="{% static 'css/sweetalert.css' %}">
+<link rel="stylesheet" href="{% static 'css/switch-colors.css' %}">
+
+
+</head>
+<style>
+    .pointer{
+        cursor: pointer;
+    }
+    .hover_role:hover { background: #c9d2da !important; }
+    .hover_role_exit:hover {
+        border-radius: 10px;
+                border: 1px solid #07ffe800 !important;
+                background-color: #b45050e6 !important;
+                /* color: ivory; */
+                color: #e7e1e1!important;
+    }
+</style>
+<body class="theme-blue index2">
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{% static 'img/logo.svg' %}" width="48" height="48" alt="Compass"></div>
+        <p>Cargando...</p>
+    </div>
+</div>
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<!-- Top Bar -->
+<nav class="navbar">
+    <div class="col-12">        
+        <div class="navbar-header">
+            <a href="javascript:void(0);" class="barss"></a>
+            {% if request.session.menu.0.permisos %}
+                {% for per in request.session.menu.0.permisos%}
+                    {% if per.name == request.session.current %}
+                        <a class="navbar-brand" href="{% url per.link %}"><img src="/static/img/logo_mpv.png" width="100" alt="Compass"><span class="m-l-10">MPV - HDAC</span></a>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <a class="navbar-brand" href="#"><img src="/static/img/logo_mpv.png" width="100" alt="Compass"><span class="m-l-10">MPV - HDAC</span></a>
+            {% endif %}
+        </div>
+        <!-- <ul class="nav navbar-nav navbar-left">            
+            <li class="hidden-sm-down">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-addon">
+                        <i class="zmdi zmdi-search"></i>
+                    </span>
+                </div>
+            </li>
+        </ul> -->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
+                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right slideDown">
+                    <li class="header">NOTIFICATIONS</li>
+                    <li class="body">
+                        <ul class="menu list-unstyled">
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-blue"><i class="zmdi zmdi-account"></i></div>
+                                <div class="menu-info">
+                                    <h4>8 New Members joined</h4>
+                                    <p><i class="zmdi zmdi-time"></i> 14 mins ago </p>
+                                </div>
+                                </a> </li>
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-amber"><i class="zmdi zmdi-shopping-cart"></i></div>
+                                <div class="menu-info">
+                                    <h4>4 Sales made</h4>
+                                    <p> <i class="zmdi zmdi-time"></i> 22 mins ago </p>
+                                </div>
+                                </a> </li>
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-red"><i class="zmdi zmdi-delete"></i></div>
+                                <div class="menu-info">
+                                    <h4><b>Nancy Doe</b> Deleted account</h4>
+                                    <p> <i class="zmdi zmdi-time"></i> 3 hours ago </p>
+                                </div>
+                                </a> </li>
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-green"><i class="zmdi zmdi-edit"></i></div>
+                                <div class="menu-info">
+                                    <h4><b>Nancy</b> Changed name</h4>
+                                    <p> <i class="zmdi zmdi-time"></i> 2 hours ago </p>
+                                </div>
+                                </a> </li>
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-grey"><i class="zmdi zmdi-comment-text"></i></div>
+                                <div class="menu-info">
+                                    <h4><b>John</b> Commented your post</h4>
+                                    <p> <i class="zmdi zmdi-time"></i> 4 hours ago </p>
+                                </div>
+                                </a> </li>
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-purple"><i class="zmdi zmdi-refresh"></i></div>
+                                <div class="menu-info">
+                                    <h4><b>John</b> Updated status</h4>
+                                    <p> <i class="zmdi zmdi-time"></i> 3 hours ago </p>
+                                </div>
+                                </a> </li>
+                            <li> <a href="javascript:void(0);">
+                                <div class="icon-circle bg-light-blue"><i class="zmdi zmdi-settings"></i></div>
+                                <div class="menu-info">
+                                    <h4>Settings Updated</h4>
+                                    <p> <i class="zmdi zmdi-time"></i> Yesterday </p>
+                                </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="footer"> <a href="javascript:void(0);">View All Notifications</a> </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="fullscreen hidden-sm-down" data-provide="fullscreen" data-close="true"><i class="zmdi zmdi-fullscreen"></i></a>
+            </li>
+            <li class="">
+                <img  href="javascript:void(0);" src="/static/img/profile_av.jpg" class="rounded-circle avatar pointer js-right-sidebar m-r-10 "  data-close="true" alt="foto_profile" width="45">
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="menu-container">
+    
+</div>
+
+<!-- Right Sidebar -->
+<aside id="rightsidebar" class="right-sidebar" style='border-left: 3px solid #0361c5 !important; background: #dbe2e8;'>
+    <div class=" member-card m-t-90">
+        <div class="member-img">
+            <a href="profile.html" class="">
+                <img src="/static/img/profile_av.jpg" class="rounded-circle" style="width: 80px" alt="profile-image">
+            </a>
+        </div>
+        <div class="body">
+            <div class="col-12">
+                <h5  class="m-t-20" style='color:#0767ab; font-size: 1.17em; margin-bottom: 15px;'>{{ request.user.docid }}</h5>
+                    {{ request.user.docid.mail }}   
+            </div>
+            <div class="p-0 m-t-10 inbox" style="border-top: 1px solid #007bff !important;">
+                <ul class="mail_list list-group">
+                    <li class="list-group-item  p-2" style="background-color: #1a4669; border-bottom: 2px solid #0361c5; ">
+                        <div class="text-center">
+                            <div class='col-12'>   
+                                <img src="/static/img/{{ request.session.rol_active.name }}.png" class="rounded-circle" width="40" alt=""> 
+                                <span class="text-white" >{{ request.session.rol_active.name.title }}</span>
+                                <div class="notify" style="top: 20%;">
+                                    <span class="heartbit" style="border-color: #539b44;"></span>
+                                    <span class="point" style="background-color: #81db6f;"></span>                    
+                                </div> 
+                            </div>            
+                        </div>
+                    </li>
+                    {% if request.session.roles %}
+                        {% for key,rol in request.session.roles.items %}
+                            {% if request.session.rol_active.pk != rol.pk %}
+                                <li class="list-group-item hover_role pointer p-1" style="background-color: #cddeef;">
+                                    <div class="text-center">
+                                        <form id="formchangerole_{{key}}" name="changerole" action="{% url 'dashboard:home' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="text"  name="rol_id" value="{{ rol.pk }}" hidden>
+                                                <a  href="javascript:;" onclick="this.parentNode.submit();return false;">
+                                                    <div class='col-12'>   
+                                                        <img src="/static/img/{{ rol.name }}.png" class="rounded-circle" width="40" alt=""> 
+                                                        <span class="text-muted" >{{ rol.name.title }}</span>
+                                                    </div> 
+                                                </a>
+                                        </form>            
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <a class="text-center text-muted hover_role_exit p-2"  style="background-color: #e6d4d4e6;"  href="{% url 'dashboard:logout' %}">
+                        <i class='zmdi zmdi-power'></i> <span >Salir</span>  
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<section class="content profile-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>Perfil de usuario
+                <small class="text-muted">Bienvenido a la Mesa de Partes Virtual - HRDAC</small>
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="##"><i class="zmdi zmdi-home"></i> Inicio</a></li>
+                    <li class="breadcrumb-item active">Perfil</li>
+                </ul>                
+            </div>
+        </div>
+    </div>    
+    <div class="container-fluid">       
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-12">
+                <div class="card member-card">
+                    <div class="header l-blue">
+                        <h5 class="m-t-10">{{ request.user.docid }}</h5><br/><br/>
+                    </div>
+                    <div class="member-img">
+                        <a href="#" class="">
+                        <img src="/static/img/profile_av.jpg" class="rounded-circle" alt="profile-image">
+                        </a>
+                    </div>
+                    <div class="body">
+                        <div class="col-12">
+                            <p class="text-muted">{{ request.user }}</p>
+                        </div>
+                        <hr>
+                        {% comment %} <div class="row">
+                            <div class="col-6">
+                                <h6>{{ request.user.docid.birthday }}</h6>
+                                <small>Nacimiento</small>
+                            </div>
+                            <div class="col-6">
+                                {% if request.user.docid.sex == 'F' %}
+                                    <h6>Femenino</h6>
+                                {% else %}
+                                    <h6>Masculino</h6>
+                                {% endif %}
+                                <small>Sexo</small>
+                            </div>                         
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#usersettings">General</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="usersettings">
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>Datos</strong> Personales</h2>
+                            </div>
+                            <div class="body">
+                                <form id='formuser' class="form" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for=''>Email</label>
+                                        <input type="email" name='mail' class="form-control" value='{% if request.user.docid.mail %}{{ request.user.docid.mail }}{% endif %}' 
+                                        required oninvalid="this.setCustomValidity('Ingrese un Email válido.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=''>Celular</label>
+                                        <input type="text" name='cellphone' class="form-control onlynumber" maxlength="9" value='{% if request.user.docid.cellphone %}{{ request.user.docid.cellphone }}{% endif %}' 
+                                        required oninvalid="this.setCustomValidity('Ingrese un número de celular.')" oninput="this.setCustomValidity('')">
+                                    </div>
+                                    <button type='submit' class="btn btn-info btn-round">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Jquery Core Js --> 
+<script src="{% static 'plugin/libscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/vendorscripts.bundle.js' %}"></script>
+
+<script src="{% static 'plugin/moment.js' %}"></script>
+<script src="{% static 'plugin/bootstrap-colorpicker.js' %}"></script>
+<script src="{% static 'plugin/jquery.inputmask.bundle.js' %}"></script>
+<script src="{% static 'plugin/jquery.multi-select.js' %}"></script>
+<script src="{% static 'plugin/bootstrap-material-datetimepicker.js' %}"></script>
+<script src="{% static 'plugin/jquery.steps.js' %}"></script>
+
+<script src="{% static 'plugin/countTo.bundle.js' %}"></script>
+<script src="{% static 'plugin/sparkline.bundle.js' %}"></script>
+<script src="{% static 'plugin/knob.bundle.js' %}"></script>
+<script src="{% static 'plugin/morrisscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/mainscripts.bundle.js' %}"></script>
+<script src="{% static 'plugin/charts/jquery-knob.js' %}"></script>
+
+<script src="{% static 'plugin/footable/js/footable.all.min.js' %}"></script>
+<script src="{% static 'plugin/footable/js/footable-init.js' %}"></script>
+
+<script src="{% static 'plugin/bootstrap-notify.js' %}"></script>
+<script src="{% static 'plugin/notifications.js' %}"></script>
+
+<script src="{% static 'plugin/toastr.js' %}"></script>
+<script src="{% static 'plugin/sweetalert.min.js' %}" ></script>
+
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/axios.min.js' %}"></script>
+
+<script>
+    /*global $ */
+    $(document).ready(function() {
+      "use strict";
+      $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+    
+      $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+    
+      $(".menu > ul > li").hover(function(e) {
+        if ($(window).width() > 943) {
+          $(this).children("ul").stop(true, false).fadeToggle(150);
+          e.preventDefault();
+        }
+      });
+      $(".menu > ul > li").click(function() {
+        if ($(window).width() <= 943) {
+          $(this).children("ul").fadeToggle(150);
+        }
+      });
+    
+      $(".h-bars").click(function(e) {
+        $(".menu > ul").toggleClass('show-on-mobile');
+        e.preventDefault();
+      });
+
+      $('.datapicker').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+      });
+
+      $('.date').inputmask('yyyy-mm-dd', { placeholder: '____-__-__' });
+      
+      $('.onlynumber').keyup(function (){
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+      });
+
+      $('.datetimepicker').bootstrapMaterialDatePicker({
+        format: 'dddd DD MMMM YYYY - HH:mm',
+        clearButton: true,
+        weekStart: 1
+      });
+
+      $('.datapicker').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+      });
+
+      $('.timepicker').bootstrapMaterialDatePicker({
+        format: 'HH:mm',
+        clearButton: true,
+        date: false
+      });
+
+      $('.date').inputmask('yyyy-mm-dd', { placeholder: '____-__-__' });
+
+      $('.onlynumber').keyup(function (){
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+      });
+    
+    });    
+    </script>    
+
+{% block scripts %}
+{% endblock scripts %}
+</body>
+</html>
